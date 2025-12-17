@@ -1,14 +1,14 @@
 site_name: mmWave Insight
 site_description: Deep Dive into mmWave Radar Technology | 深入毫米波雷达技术
 site_author: mmWave Radar Community
-site_url: https://yourusername.github.io/mmwave_radar_learning_notebook/
+site_url: https://matreshka15.github.io/mmWave_Insight/
 
 # Repository
-repo_name: mmwave-insight
-repo_url: https://github.com/yourusername/mmwave-insight
+repo_name: matreshka15/mmWave_Insight
+repo_url: https://github.com/matreshka15/mmWave_Insight
 
 # Copyright
-copyright: Copyright &copy; 2025 mmWave Insight | Based on mmwave_radar_learning_notebook
+copyright: Copyright &copy; 2025 matreshka15 | mmWave Insight
 
 # Configuration
 theme:
