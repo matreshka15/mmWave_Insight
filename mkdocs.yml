@@ -50,7 +50,11 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -76,6 +80,8 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
 
 # Page tree
 nav:
@@ -91,6 +97,7 @@ nav:
   - IWR1443 平台:
     - 硬件介绍: iwr1443/hardware.md
     - 开发环境: iwr1443/development.md
+  - 📝 互动练习: exercises.md
   - 图片库: image-gallery.md
   - 参考资料: references.md
 
