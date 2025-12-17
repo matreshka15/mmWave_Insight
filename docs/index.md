@@ -8,47 +8,81 @@
 
 ---
 
-## 欢迎来到 mmWave Insight
+## 👋 欢迎来到 mmWave Insight
 
-**mmWave Insight** 是一个专业的毫米波雷达学习平台，致力于深入探索雷达原理、毫米波技术以及实际应用。本平台整合了系统的理论知识和 TI IWR1443 开发板的实践指导。
+!!! info "关于本平台"
+    **mmWave Insight** 是一个专业的毫米波雷达学习平台，致力于深入探索雷达原理、毫米波技术以及实际应用。本平台整合了系统的理论知识和 TI IWR1443 开发板的实践指导。
 
-### 关于本笔记
+!!! tip "学习路径推荐"
+    📚 **新手入门**: 从[雷达基础](radar-basics/overview.md)开始  
+    🔬 **进阶学习**: 深入[FMCW 调制](mmwave/fmcw.md)和信号处理  
+    🛠️ **实战应用**: 基于[IWR1443 平台](iwr1443/hardware.md)动手实践
 
-- **平台**: IWR1443BOOST powered by Texas Instruments
-- **内容**: 雷达原理课程、毫米波雷达学习笔记
-- **目的**: 系统学习和记录毫米波雷达的原理、雷达方程等知识
+### 📋 平台特色
 
-## 主要内容
+<div class="grid" markdown>
 
-### 📡 雷达基础
+!!! abstract "开发平台"
+    **IWR1443BOOST**  
+    Texas Instruments 76-81 GHz 毫米波雷达  
+    集成 ARM + DSP，功能强大
 
-深入学习雷达的基本原理，包括：
+!!! note "内容特点"
+    **理论与实践结合**  
+    雷达原理课程 + 实战开发指导  
+    从基础到应用，循序渐进
 
-- 雷达系统概述
-- 雷达方程推导
-- 多普勒效应及应用
+!!! success "学习目标"
+    **掌握核心技术**  
+    理解雷达方程、FMCW 调制  
+    具备毫米波雷达开发能力
 
-[开始学习 →](radar-basics/overview.md){ .md-button .md-button--primary }
+</div>
 
-### 🌐 毫米波雷达
+## 📚 主要内容
 
-专注于毫米波雷达的特性和应用：
+<div class="grid cards" markdown>
 
-- FMCW (调频连续波) 调制技术
-- 信号处理方法
-- 目标检测算法
+-   :material-radar:{ .lg .middle } **雷达基础**
 
-[了解更多 →](mmwave/fmcw.md){ .md-button }
+    ---
 
-### 🔧 IWR1443 平台
+    深入学习雷达的基本原理，包括：
 
-基于 TI IWR1443 开发板的实践：
+    - ✅ 雷达系统概述与工作原理
+    - ✅ 雷达方程完整推导
+    - ✅ 多普勒效应及速度测量
+    - ✅ RCS 与目标特性分析
 
-- 硬件平台介绍
-- 开发环境搭建
-- 实际应用案例
+    [开始学习 :octicons-arrow-right-24:](radar-basics/overview.md){ .md-button .md-button--primary }
 
-[查看详情 →](iwr1443/hardware.md){ .md-button }
+-   :material-sine-wave:{ .lg .middle } **毫米波雷达**
+
+    ---
+
+    专注于毫米波雷达的特性和应用：
+
+    - ✅ FMCW 调频连续波调制
+    - ✅ Range-Doppler FFT 处理
+    - ✅ DOA 角度估计算法
+    - ✅ CFAR 目标检测技术
+
+    [了解更多 :octicons-arrow-right-24:](mmwave/fmcw.md){ .md-button }
+
+-   :material-chip:{ .lg .middle } **IWR1443 平台**
+
+    ---
+
+    基于 TI IWR1443 开发板的实践：
+
+    - ✅ 硬件架构与性能参数
+    - ✅ SDK 开发环境搭建
+    - ✅ 代码示例与调试技巧
+    - ✅ 实际应用案例分享
+
+    [查看详情 :octicons-arrow-right-24:](iwr1443/hardware.md){ .md-button }
+
+</div>
 
 ---
 
