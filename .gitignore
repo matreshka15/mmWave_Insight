@@ -1,0 +1,30 @@
+# Python 虚拟环境
+venv/
+env/
+ENV/
+
+# MkDocs 构建输出
+site/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.bak
+*.log
