@@ -61,7 +61,7 @@ git push origin main
 
 4. **自动部署**
    - GitHub Actions 会自动构建并部署
-   - 几分钟后访问：`https://yourusername.github.io/repo-name/`
+   - 几分钟后访问：`https://matreshka15.github.io/mmWave_Insight/`
 
 ### 方法 2：手动部署
 
