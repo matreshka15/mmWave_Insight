@@ -194,7 +194,7 @@
     .md-typeset table:not([class]) {
         font-size: 0.85em;
     }
-    
+
     .md-typeset .grid.cards > :is(ul, ol) {
         grid-template-columns: 1fr !important;
     }
@@ -206,7 +206,7 @@
     .md-typeset details {
         page-break-inside: avoid;
     }
-    
+
     .md-typeset figure {
         page-break-inside: avoid;
     }
@@ -329,7 +329,7 @@
         padding: 15px;
         margin: 15px 0;
     }
-    
+
     .interactive-section::before,
     .calculator-section::before {
         font-size: 0.85em;

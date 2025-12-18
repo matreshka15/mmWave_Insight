@@ -15,7 +15,7 @@
 
 !!! tip "学习路径推荐"
     **由浅入深的学习路径：**
-    
+
     1. 📚 **基础入门** → 从[雷达基础](radar-basics/overview.md)开始，理解雷达工作原理
     2. 🔬 **进阶理论** → 深入[FMCW 调制](mmwave/fmcw.md)和信号处理技术
     3. 🎮 **互动实践** → 通过[交互式游乐场](interactive-playground.md)动手体验
@@ -26,18 +26,18 @@
 <div class="grid" markdown>
 
 !!! abstract "开发平台"
-    **IWR1443BOOST**  
-    Texas Instruments 76-81 GHz 毫米波雷达  
+    **IWR1443BOOST**
+    Texas Instruments 76-81 GHz 毫米波雷达
     集成 ARM + DSP，功能强大
 
 !!! note "内容特点"
-    **理论与实践结合**  
-    雷达原理课程 + 实战开发指导  
+    **理论与实践结合**
+    雷达原理课程 + 实战开发指导
     从基础到应用，循序渐进
 
 !!! success "学习目标"
-    **掌握核心技术**  
-    理解雷达方程、FMCW 调制  
+    **掌握核心技术**
+    理解雷达方程、FMCW 调制
     具备毫米波雷达开发能力
 
 </div>
@@ -111,7 +111,7 @@ graph LR
     C --> D[🎮 互动练习]
     D --> E[🛠️ 硬件开发]
     E --> F[🚀 实际应用]
-    
+
     style A fill:#e3f2fd
     style B fill:#f3e5f5
     style C fill:#fff9c4
@@ -121,8 +121,8 @@ graph LR
 ```
 
 !!! success "学习里程碑"
-    **初级目标**：理解雷达基本原理和雷达方程 ✓  
-    **中级目标**：掌握 FMCW 调制和 FFT 信号处理 ✓  
+    **初级目标**：理解雷达基本原理和雷达方程 ✓
+    **中级目标**：掌握 FMCW 调制和 FFT 信号处理 ✓
     **高级目标**：完成 IWR1443 平台的实战开发 ✓
 
 ---
@@ -136,7 +136,7 @@ graph LR
     ---
 
     **理解雷达如何工作**
-    
+
     从[雷达原理概述](radar-basics/overview.md)开始，建立基础认知
 
 -   :material-calculator:{ .lg .middle } __第二步__
@@ -144,7 +144,7 @@ graph LR
     ---
 
     **学习核心公式**
-    
+
     深入[雷达方程](radar-basics/radar-equation.md)，掌握计算方法
 
 -   :material-sine-wave:{ .lg .middle } __第三步__
@@ -152,7 +152,7 @@ graph LR
     ---
 
     **探索 FMCW 技术**
-    
+
     理解[FMCW 调制](mmwave/fmcw.md)的测距测速原理
 
 -   :material-gamepad:{ .lg .middle } __第四步__
@@ -160,7 +160,7 @@ graph LR
     ---
 
     **动手实践**
-    
+
     使用[交互式工具](interactive-playground.md)验证理论
 
 </div>

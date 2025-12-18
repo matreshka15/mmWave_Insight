@@ -61,6 +61,8 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -86,25 +88,25 @@ extra_javascript:
 # Page tree
 nav:
   - 🏠 主页: index.md
-  
+
   - 📚 基础入门:
     - 雷达原理概述: radar-basics/overview.md
     - 雷达方程详解: radar-basics/radar-equation.md
     - 多普勒效应: radar-basics/doppler-effect.md
-  
+
   - 🔬 进阶理论:
     - FMCW 调制原理: mmwave/fmcw.md
     - 信号处理技术: mmwave/signal-processing.md
     - 目标检测算法: mmwave/target-detection.md
-  
+
   - 🎮 互动学习:
     - 交互式游乐场: interactive-playground.md
     - 练习题库: exercises.md
-  
+
   - 🛠️ 硬件平台:
     - IWR1443 硬件: iwr1443/hardware.md
     - 开发环境搭建: iwr1443/development.md
-  
+
   - 📖 附加资源:
     - 图片库: image-gallery.md
     - 参考资料: references.md
