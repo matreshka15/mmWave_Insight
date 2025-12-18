@@ -103,7 +103,7 @@ $$
 
 ![FMCW 频率波形](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/FMCW_Fwave.png)
 
-*📊 FMCW Chirp 信号的频率-时间特性：频率随时间线性增加*
+> 📊 FMCW Chirp 信号的频率-时间特性：频率随时间线性增加
 
 ## 📏 距离测量原理
 
@@ -326,7 +326,7 @@ $$
 
 ![Frame 结构](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/defineaframe.png)
 
-*图：一个 Frame 由多个 Chirp 组成，用于多普勒分析*
+> 图：一个 Frame 由多个 Chirp 组成，用于多普勒分析
 
 每个 Frame 包含多个 Chirp，通过对每个 Chirp 的同一距离 bin 进行 FFT 可以提取速度信息。
 
@@ -338,7 +338,7 @@ $$
 
 ![三角波 FMCW](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/speedmes.png)
 
-*图：三角波调制的 FMCW 信号用于同时测距和测速*
+> 图：三角波调制的 FMCW 信号用于同时测距和测速
 
 通过上扫频和下扫频的拍频差异可以解耦距离和速度信息。
 
@@ -380,7 +380,7 @@ $$
 
 FMCW 雷达采集的原始数据可以表示为三维数据立方体：
 
-```
+```text
 维度 1: 快时间（Fast-time）- 单个 chirp 内的采样点
 维度 2: 慢时间（Slow-time）- 多个 chirp 之间
 维度 3: 通道（Channel）- 多个接收天线
@@ -419,7 +419,7 @@ $$
 
 ![角度 FFT 处理](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/angleFFT.png)
 
-*图：多维 FFT 处理流程，包括距离、速度和角度维度*
+> 图：多维 FFT 处理流程，包括距离、速度和角度维度
 
 ### 处理流程
 
