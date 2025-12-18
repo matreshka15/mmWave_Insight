@@ -19,7 +19,7 @@
 
     ---
 
-    确定目标的位置  
+    确定目标的位置
     （距离、方位、高度）
 
 -   :material-speedometer:{ .lg } **测速**
@@ -42,10 +42,9 @@
 
 雷达通过发射电磁波并接收目标反射回来的回波来工作。基本过程如下：
 
-<figure markdown>
-  ![雷达发射接收示意](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/TXRX.png)
-  <figcaption>图：雷达的发射和接收基本原理</figcaption>
-</figure>
+![雷达发射接收示意](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/TXRX.png)
+
+*图：雷达的发射和接收基本原理*
 
 ```mermaid
 graph LR
@@ -72,13 +71,13 @@ graph LR
     $$
 
     **参数说明**：
-    
+
     | 符号 | 含义 | 数值 |
     |------|------|------|
     | $R$ | 目标距离 | - |
     | $c$ | 光速 | $3 \times 10^8$ m/s |
     | $\Delta t$ | 往返时间差 | - |
-    
+
     !!! warning "注意"
         公式中除以 2 是因为电磁波往返经过了两倍的距离！
 
@@ -165,17 +164,17 @@ graph LR
 !!! warning "需要注意的问题"
 
     **1. 大气衰减**
-    
+
     - 受雨雾影响较大
     - 作用距离相对较短
-    
+
     **2. 技术难度**
-    
+
     - 高频器件设计复杂
     - 成本相对较高
-    
+
     **3. 多径效应**
-    
+
     - 易受环境反射影响
     - 需要复杂的信号处理
 
@@ -190,19 +189,19 @@ graph TD
     A --> D[天线系统]
     A --> E[信号处理系统]
     A --> F[电源系统]
-    
+
     B --> B1[信号源]
     B --> B2[调制器]
     B --> B3[功率放大器]
-    
+
     C --> C1[低噪声放大器]
     C --> C2[混频器]
     C --> C3[中频放大器]
     C --> C4[检波器]
-    
+
     D --> D1[发射天线]
     D --> D2[接收天线]
-    
+
     E --> E1[ADC]
     E --> E2[DSP]
     E --> E3[目标检测]
