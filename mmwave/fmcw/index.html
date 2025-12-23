@@ -1,0 +1,3106 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Deep Dive into mmWave Radar Technology | 深入毫米波雷达技术">
+      
+      
+        <meta name="author" content="mmWave Radar Community">
+      
+      
+        <link rel="canonical" href="https://matreshka15.github.io/mmWave_Insight/mmwave/fmcw/">
+      
+      
+        <link rel="prev" href="../../radar-basics/doppler-effect/">
+      
+      
+        <link rel="next" href="../signal-processing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>FMCW 调制原理 - mmWave Insight</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fmcw" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="mmWave Insight" class="md-header__button md-logo" aria-label="mmWave Insight" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mmWave Insight
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FMCW 调制原理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/matreshka15/mmWave_Insight" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matreshka15/mmWave_Insight
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../radar-basics/overview/" class="md-tabs__link">
+          
+  
+  
+  📚 基础入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  🔬 进阶理论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../interactive-playground/" class="md-tabs__link">
+          
+  
+  
+  🎮 互动学习
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../iwr1443/hardware/" class="md-tabs__link">
+          
+  
+  
+  🛠️ 硬件平台
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../image-gallery/" class="md-tabs__link">
+          
+  
+  
+  📖 附加资源
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="mmWave Insight" class="md-nav__button md-logo" aria-label="mmWave Insight" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    mmWave Insight
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/matreshka15/mmWave_Insight" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matreshka15/mmWave_Insight
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 主页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 基础入门
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 基础入门
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../radar-basics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达原理概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../radar-basics/radar-equation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达方程详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../radar-basics/doppler-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    多普勒效应
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔬 进阶理论
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔬 进阶理论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FMCW 调制原理
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FMCW 调制原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤔 为什么需要 FMCW？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 FMCW 基本原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 FMCW 基本原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工作机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chirp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎵 Chirp 信号
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📏 距离测量原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📏 距离测量原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📐 数学推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 距离分辨率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 最大探测距离
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最大探测距离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        速度测量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="速度测量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多普勒效应的影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chirp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单 Chirp 的局限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chirp_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解决方案：多 Chirp 处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角波调制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三角波调制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上扫频和下扫频
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        距离和速度解耦
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2d-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2D-FFT 处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2D-FFT 处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据立方体
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fftrange-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一次 FFT：Range FFT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fftdoppler-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二次 FFT：Doppler FFT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        处理流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FMCW 雷达参数设计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FMCW 雷达参数设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        距离相关参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        速度相关参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FMCW 雷达的优势
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FMCW 雷达的优势">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 低峰值功率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 同时测距测速
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 高距离分辨率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 低截获概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 抗干扰能力
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FMCW 雷达的挑战
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FMCW 雷达的挑战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 频率非线性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 发射泄漏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 相位噪声
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 多径效应
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实际应用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实际应用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 1：汽车雷达参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#277-ghz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 2：77 GHz 雷达配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ti-mmwave-sdk-fmcw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TI mmWave SDK 中的 FMCW
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TI mmWave SDK 中的 FMCW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chirp_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chirp 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frame 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 延伸学习
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signal-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理技术
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../target-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    目标检测算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎮 互动学习
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎮 互动学习
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive-playground/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交互式游乐场
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    练习题库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ 硬件平台
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🛠️ 硬件平台
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iwr1443/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IWR1443 硬件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iwr1443/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    开发环境搭建
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 附加资源
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📖 附加资源
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../image-gallery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图片库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    参考资料
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤔 为什么需要 FMCW？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 FMCW 基本原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 FMCW 基本原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工作机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chirp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎵 Chirp 信号
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📏 距离测量原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📏 距离测量原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📐 数学推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 距离分辨率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 最大探测距离
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最大探测距离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        速度测量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="速度测量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多普勒效应的影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chirp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单 Chirp 的局限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chirp_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解决方案：多 Chirp 处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角波调制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三角波调制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上扫频和下扫频
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        距离和速度解耦
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2d-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2D-FFT 处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2D-FFT 处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据立方体
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fftrange-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一次 FFT：Range FFT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fftdoppler-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二次 FFT：Doppler FFT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        处理流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FMCW 雷达参数设计
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FMCW 雷达参数设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        距离相关参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        速度相关参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FMCW 雷达的优势
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FMCW 雷达的优势">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 低峰值功率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 同时测距测速
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 高距离分辨率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 低截获概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 抗干扰能力
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fmcw_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FMCW 雷达的挑战
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FMCW 雷达的挑战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 频率非线性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 发射泄漏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 相位噪声
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 多径效应
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实际应用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实际应用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 1：汽车雷达参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#277-ghz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 2：77 GHz 雷达配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ti-mmwave-sdk-fmcw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TI mmWave SDK 中的 FMCW
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TI mmWave SDK 中的 FMCW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chirp_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chirp 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frame 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 延伸学习
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="fmcw">FMCW 调制<a class="headerlink" href="#fmcw" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">章节概述</p>
+<p>调频连续波（<strong>F</strong>requency <strong>M</strong>odulated <strong>C</strong>ontinuous <strong>W</strong>ave, <strong>FMCW</strong>）是毫米波雷达最常用的工作模式，它通过发射频率随时间线性变化的连续波信号来实现目标探测。</p>
+<p>📚 <strong>本章学习路线</strong>：</p>
+<ol>
+<li>🎵 理解 Chirp 信号的本质</li>
+<li>📏 学会通过拍频测量距离</li>
+<li>🚗 掌握速度测量原理</li>
+<li>📊 理解 2D-FFT 信号处理</li>
+</ol>
+<p>⏱️ <strong>预计时间</strong>：40-50 分钟</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">前置知识</p>
+<p>学习本章前建议先了解：</p>
+<ul>
+<li>📡 <a href="../../radar-basics/overview/">雷达基本原理</a></li>
+<li>🌊 <a href="../../radar-basics/doppler-effect/">多普勒效应</a></li>
+<li>📐 傅里叶变换基础</li>
+</ul>
+</div>
+<hr />
+<h2 id="fmcw_1">🤔 为什么需要 FMCW？<a class="headerlink" href="#fmcw_1" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>脉冲雷达 vs FMCW 雷达</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">🔴 脉冲雷达</label><label for="__tabbed_1_2">🟢 FMCW 雷达</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>工作方式</strong>：发射短脉冲，测量回波时间</p>
+<p><strong>优点</strong>：
+- ✅ 原理简单
+- ✅ 峰值功率高</p>
+<p><strong>缺点</strong>：
+- ❌ 平均功率低
+- ❌ 近距离测量困难
+- ❌ 需要高速 ADC
+- ❌ 功耗大</p>
+</div>
+<div class="tabbed-block">
+<p><strong>工作方式</strong>：连续发射调频信号，测量频率差</p>
+<p><strong>优点</strong>：
+- ✅ 功耗低（连续发射，低功率）
+- ✅ 近距离性能好
+- ✅ ADC 要求低
+- ✅ 可同时测距和测速</p>
+<p><strong>缺点</strong>：
+- ❌ 信号处理复杂
+- ❌ 发射泄漏影响大</p>
+</div>
+</div>
+</div>
+</details>
+<div class="admonition success">
+<p class="admonition-title">FMCW 的核心优势</p>
+<p><strong>汽车雷达为什么选择 FMCW？</strong></p>
+<ul>
+<li>🔋 <strong>低功耗</strong>：适合电池供电</li>
+<li>📏 <strong>近距离</strong>：可测量 0.1 米到 200 米</li>
+<li>💰 <strong>成本低</strong>：ADC 要求低</li>
+<li>🎯 <strong>高精度</strong>：厘米级距离分辨率</li>
+</ul>
+</div>
+<hr />
+<h2 id="fmcw_2">📊 FMCW 基本原理<a class="headerlink" href="#fmcw_2" title="Permanent link">&para;</a></h2>
+<h3 id="_1">工作机制<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>FMCW 雷达发射一个频率随时间线性变化的信号（称为 <strong>chirp</strong>），接收目标反射回来的回波信号，通过测量发射信号和接收信号之间的频率差（<strong>拍频</strong>）来确定目标的距离和速度。</p>
+<div class="mermaid">graph TD
+    A[📡 发射 Chirp 信号] --&gt; B[🎯 目标反射]
+    B --&gt; C[📡 接收回波]
+    C --&gt; D[⚡ 混频器]
+    A --&gt; D
+    D --&gt; E[🎵 拍频信号]
+    E --&gt; F[📊 FFT 处理]
+    F --&gt; G[✅ 距离/速度信息]</div>
+<h3 id="chirp">🎵 Chirp 信号<a class="headerlink" href="#chirp" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Chirp 信号公式</p>
+<p>线性调频信号的瞬时频率为：</p>
+<div class="arithmatex">\[
+f(t) = f_0 + S \cdot t
+\]</div>
+<p><strong>参数定义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f_0\)</span></td>
+<td>起始频率</td>
+<td>Chirp 的起始频率值</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S\)</span></td>
+<td>调频斜率</td>
+<td><span class="arithmatex">\(S = B/T_c\)</span> (Chirp Rate)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(B\)</span></td>
+<td>调频带宽</td>
+<td>频率扫描的总带宽</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T_c\)</span></td>
+<td>Chirp 周期</td>
+<td>一个 Chirp 的持续时间</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>完整的发射信号表达式为：</p>
+<div class="arithmatex">\[
+\boxed{s_t(t) = A_t \cos\left[2\pi\left(f_0 t + \frac{S t^2}{2}\right) + \phi_0\right]}
+\]</div>
+<p><img alt="FMCW 频率波形" src="../../images/fmcw/FMCW_Fwave.png" /></p>
+<blockquote>
+<p>📊 FMCW Chirp 信号的频率-时间特性：频率随时间线性增加</p>
+</blockquote>
+<h2 id="_2">📏 距离测量原理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">🎯 核心思想<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">测距的关键</p>
+<p><strong>时间延迟 → 频率差</strong></p>
+<p>FMCW 雷达巧妙地将<strong>时间测量</strong>转换为<strong>频率测量</strong>！</p>
+</div>
+<p><strong>步骤分解</strong>：</p>
+<div class="mermaid">graph LR
+    A[目标距离 R] --&gt; B[时间延迟 τ]
+    B --&gt; C[频率差 f_beat]
+    C --&gt; D[计算距离 R]
+
+    style A fill:#e1f5ff
+    style D fill:#d3f9d8</div>
+<h3 id="_4">📐 数学推导<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">步骤 1：时间延迟</label><label for="__tabbed_2_2">步骤 2：接收信号</label><label for="__tabbed_2_3">步骤 3：混频得到拍频</label><label for="__tabbed_2_4">步骤 4：计算距离</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>电磁波往返目标所需时间：</p>
+<div class="arithmatex">\[
+\boxed{\tau = \frac{2R}{c}}
+\]</div>
+<div class="admonition example">
+<p class="admonition-title">数值感知</p>
+<ul>
+<li>距离 <strong>10 m</strong> → 延迟 <strong>67 ns</strong></li>
+<li>距离 <strong>100 m</strong> → 延迟 <strong>667 ns</strong></li>
+<li>距离 <strong>1 km</strong> → 延迟 <strong>6.67 μs</strong></li>
+</ul>
+</div>
+</div>
+<div class="tabbed-block">
+<p>接收信号相比发射信号<strong>延迟了 <span class="arithmatex">\(\tau\)</span></strong>：</p>
+<div class="arithmatex">\[
+s_r(t) = A_r \cos\left[2\pi\left(f_0 (t-\tau) + \frac{S (t-\tau)^2}{2}\right) + \phi_0\right]
+\]</div>
+</div>
+<div class="tabbed-block">
+<p><img alt="FMCW 测距原理" src="../../images/fmcw/FMCW.png" /></p>
+<p><em>📈 FMCW 测距原理图解：发射信号（蓝色）和接收信号（红色）之间的频率差即为拍频</em></p>
+<p><strong>关键观察</strong>：由于 Chirp 信号频率线性增加，时间延迟 <span class="arithmatex">\(\tau\)</span> 对应一个频率差！</p>
+<div class="arithmatex">\[
+f_{beat} = |f_t(t) - f_r(t)| = S \tau = \frac{2SR}{c}
+\]</div>
+</div>
+<div class="tabbed-block">
+<div class="admonition success">
+<p class="admonition-title">测距公式</p>
+<div class="arithmatex">\[
+\boxed{R = \frac{c \cdot f_{beat}}{2S} = \frac{c \cdot f_{beat} \cdot T_c}{2B}}
+\]</div>
+<p><strong>公式解读</strong>：</p>
+<ul>
+<li>拍频 <span class="arithmatex">\(f_{beat}\)</span> 越大 → 距离 <span class="arithmatex">\(R\)</span> 越远</li>
+<li>带宽 <span class="arithmatex">\(B\)</span> 越大 → 同样拍频对应距离越近（分辨率更高）</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<details class="example">
+<summary>🧮 实际计算案例</summary>
+<p><strong>雷达参数</strong>：</p>
+<ul>
+<li>带宽 <span class="arithmatex">\(B = 4\)</span> GHz</li>
+<li>Chirp 时间 <span class="arithmatex">\(T_c = 100\)</span> μs</li>
+<li>调频斜率 <span class="arithmatex">\(S = B/T_c = 40\)</span> MHz/μs</li>
+</ul>
+<p><strong>测量结果</strong>：</p>
+<ul>
+<li>拍频 <span class="arithmatex">\(f_{beat} = 800\)</span> kHz</li>
+</ul>
+<p><strong>计算距离</strong>：
+$$
+R = \frac{3 \times 10^8 \times 800 \times 10^3 \times 100 \times 10^{-6}}{2 \times 4 \times 10^9} = 30 \text{ m}
+$$</p>
+<div class="admonition tip">
+<p class="admonition-title">验算</p>
+<p>也可以用另一个公式：
+$$
+R = \frac{c \cdot f_{beat}}{2S} = \frac{3 \times 10^8 \times 800 \times 10^3}{2 \times 40 \times 10^{12}} = 30 \text{ m}
+$$</p>
+</div>
+</details>
+<h3 id="_5">🎯 距离分辨率<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">什么是距离分辨率？</p>
+<p><strong>距离分辨率</strong>是指雷达能够分辨两个相邻目标的最小距离差。</p>
+<p>想象两辆车：如果它们靠得太近，雷达就会把它们当成一个目标！</p>
+</div>
+<p>两个目标可分辨的最小距离差由信号带宽决定：</p>
+<div class="arithmatex">\[
+\boxed{\Delta R = \frac{c}{2B}}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">关键洞察</p>
+<p><strong>带宽越大，分辨率越高！</strong></p>
+<ul>
+<li>带宽翻倍 → 分辨率提高 2 倍</li>
+<li>这就是为什么 4 GHz 带宽的毫米波雷达性能优秀</li>
+</ul>
+</div>
+<details class="example">
+<summary>不同带宽的分辨率对比</summary>
+<table>
+<thead>
+<tr>
+<th>带宽 <span class="arithmatex">\(B\)</span></th>
+<th>距离分辨率 <span class="arithmatex">\(\Delta R\)</span></th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50 MHz</td>
+<td>3.0 m</td>
+<td>远程监视雷达</td>
+</tr>
+<tr>
+<td>200 MHz</td>
+<td>0.75 m</td>
+<td>气象雷达</td>
+</tr>
+<tr>
+<td>1 GHz</td>
+<td>15 cm</td>
+<td>汽车雷达（老一代）</td>
+</tr>
+<tr>
+<td><strong>4 GHz</strong></td>
+<td><strong>3.75 cm</strong></td>
+<td><strong>现代毫米波雷达</strong> ⭐</td>
+</tr>
+<tr>
+<td>8 GHz</td>
+<td>1.9 cm</td>
+<td>高精度测距</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition success">
+<p class="admonition-title">毫米波雷达的优势</p>
+<p>4 GHz 带宽可以实现 <strong>厘米级</strong> 的距离分辨率，足以：</p>
+<ul>
+<li>🚗 区分前方多辆车</li>
+<li>🚴 识别行人和自行车</li>
+<li>🛣️ 检测道路边界</li>
+</ul>
+</div>
+</details>
+<h3 id="_6">📊 最大探测距离<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>最大距离由采样率和 Chirp 时间决定：</p>
+<div class="arithmatex">\[
+\boxed{R_{max} = \frac{c \cdot f_s \cdot T_c}{4B}}
+\]</div>
+<details class="info">
+<summary>为什么有最大距离限制？</summary>
+<p><strong>原因</strong>：拍频不能超过采样率的一半（奈奎斯特定理）</p>
+<div class="arithmatex">\[
+f_{beat,max} = \frac{f_s}{2}
+\]</div>
+<p>代入测距公式：
+$$
+R_{max} = \frac{c \cdot f_{beat,max}}{2S} = \frac{c \cdot f_s}{4S} = \frac{c \cdot f_s \cdot T_c}{4B}
+$$</p>
+</details>
+<details class="example">
+<summary>🎮 参数设计练习</summary>
+<p><strong>任务</strong>：设计一个汽车防撞雷达</p>
+<p><strong>需求</strong>：</p>
+<ul>
+<li>✅ 最大探测距离：200 m</li>
+<li>✅ 距离分辨率：5 cm</li>
+<li>✅ 采样率：尽可能低（降低成本）</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<p><strong>步骤 1</strong>：确定带宽
+$$
+B = \frac{c}{2\Delta R} = \frac{3 \times 10^8}{2 \times 0.05} = 3 \text{ GHz}
+$$</p>
+<p><strong>步骤 2</strong>：选择 Chirp 时间（假设 <span class="arithmatex">\(T_c = 50\)</span> μs）</p>
+<p><strong>步骤 3</strong>：计算所需采样率
+$$
+f_s = \frac{4BR_{max}}{cT_c} = \frac{4 \times 3 \times 10^9 \times 200}{3 \times 10^8 \times 50 \times 10^{-6}} = 16 \text{ MHz}
+$$</p>
+<div class="admonition success">
+<p class="admonition-title">设计结果</p>
+<ul>
+<li>带宽：<strong>3 GHz</strong></li>
+<li>Chirp 时间：<strong>50 μs</strong></li>
+<li>采样率：<strong>16 MHz</strong> （16-bit ADC 可实现）</li>
+<li>距离分辨率：<strong>5 cm</strong> ✅</li>
+<li>最大距离：<strong>200 m</strong> ✅</li>
+</ul>
+</div>
+</details>
+<h3 id="_7">最大探测距离<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>由采样定理，最大不模糊距离取决于采样率：</p>
+<div class="arithmatex">\[
+R_{max} = \frac{c \cdot f_s \cdot T_c}{4B}
+\]</div>
+<p>其中 <span class="arithmatex">\(f_s\)</span> 是 ADC 采样率。</p>
+<p>或者用另一种形式：</p>
+<div class="arithmatex">\[
+R_{max} = \frac{c}{2 \cdot \Delta f}
+\]</div>
+<p>其中 <span class="arithmatex">\(\Delta f = B/N_{samples}\)</span> 是频率分辨率。</p>
+<h2 id="_8">速度测量<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">多普勒效应的影响<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>当目标有径向速度 <span class="arithmatex">\(v_r\)</span> 时，会产生多普勒频移：</p>
+<div class="arithmatex">\[
+f_d = \frac{2v_r}{\lambda} = \frac{2v_r f_0}{c}
+\]</div>
+<p>这会导致拍频发生偏移。</p>
+<h3 id="chirp_1">单 Chirp 的局限<a class="headerlink" href="#chirp_1" title="Permanent link">&para;</a></h3>
+<p>单个 chirp 无法区分距离和速度引起的拍频变化，因为：</p>
+<div class="arithmatex">\[
+f_{beat} = f_R + f_d
+\]</div>
+<p>其中 <span class="arithmatex">\(f_R\)</span> 是距离分量，<span class="arithmatex">\(f_d\)</span> 是多普勒分量。</p>
+<h3 id="chirp_2">解决方案：多 Chirp 处理<a class="headerlink" href="#chirp_2" title="Permanent link">&para;</a></h3>
+<p>发射多个连续的 chirp，形成一个帧（frame）：</p>
+<p><img alt="Frame 结构" src="../../images/fmcw/defineaframe.png" /></p>
+<blockquote>
+<p>图：一个 Frame 由多个 Chirp 组成，用于多普勒分析</p>
+</blockquote>
+<p>每个 Frame 包含多个 Chirp，通过对每个 Chirp 的同一距离 bin 进行 FFT 可以提取速度信息。</p>
+<h2 id="_10">三角波调制<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">上扫频和下扫频<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>使用三角波调制（up-chirp 和 down-chirp）：</p>
+<p><img alt="三角波 FMCW" src="../../images/fmcw/speedmes.png" /></p>
+<blockquote>
+<p>图：三角波调制的 FMCW 信号用于同时测距和测速</p>
+</blockquote>
+<p>通过上扫频和下扫频的拍频差异可以解耦距离和速度信息。</p>
+<h3 id="_12">距离和速度解耦<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><strong>上扫频（Up-chirp）</strong>：
+$$
+f_{beat,up} = f_R + f_d
+$$</p>
+<p><strong>下扫频（Down-chirp）</strong>：
+$$
+f_{beat,down} = f_R - f_d
+$$</p>
+<p>求和消除多普勒分量：
+$$
+f_R = \frac{f_{beat,up} + f_{beat,down}}{2}
+$$</p>
+<p>求差得到多普勒分量：
+$$
+f_d = \frac{f_{beat,up} - f_{beat,down}}{2}
+$$</p>
+<p>从而得到：</p>
+<div class="arithmatex">\[
+\boxed{R = \frac{c \cdot f_R \cdot T_c}{2B}}
+\]</div>
+<div class="arithmatex">\[
+\boxed{v_r = \frac{\lambda \cdot f_d}{2}}
+\]</div>
+<h2 id="2d-fft">2D-FFT 处理<a class="headerlink" href="#2d-fft" title="Permanent link">&para;</a></h2>
+<h3 id="_13">数据立方体<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>FMCW 雷达采集的原始数据可以表示为三维数据立方体：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>维度 1: 快时间（Fast-time）- 单个 chirp 内的采样点
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>维度 2: 慢时间（Slow-time）- 多个 chirp 之间
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>维度 3: 通道（Channel）- 多个接收天线
+</code></pre></div>
+<h3 id="fftrange-fft">第一次 FFT：Range FFT<a class="headerlink" href="#fftrange-fft" title="Permanent link">&para;</a></h3>
+<p>对每个 chirp 的快时间采样进行 FFT，得到距离信息：</p>
+<div class="arithmatex">\[
+S_R(k, m) = \sum_{n=0}^{N-1} s(n, m) \cdot e^{-j2\pi kn/N}
+\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(n\)</span> 是快时间采样索引</li>
+<li><span class="arithmatex">\(m\)</span> 是 chirp 索引</li>
+<li><span class="arithmatex">\(k\)</span> 是距离 bin</li>
+</ul>
+<p>结果：<strong>Range Profile</strong>（距离剖面）</p>
+<h3 id="fftdoppler-fft">第二次 FFT：Doppler FFT<a class="headerlink" href="#fftdoppler-fft" title="Permanent link">&para;</a></h3>
+<p>对每个距离 bin 的慢时间序列进行 FFT，得到速度信息：</p>
+<div class="arithmatex">\[
+S_{RD}(k, l) = \sum_{m=0}^{M-1} S_R(k, m) \cdot e^{-j2\pi lm/M}
+\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(m\)</span> 是 chirp 索引</li>
+<li><span class="arithmatex">\(l\)</span> 是速度 bin</li>
+</ul>
+<p>结果：<strong>Range-Doppler Map</strong>（距离-多普勒图）</p>
+<p><img alt="角度 FFT 处理" src="../../images/fmcw/angleFFT.png" /></p>
+<blockquote>
+<p>图：多维 FFT 处理流程，包括距离、速度和角度维度</p>
+</blockquote>
+<h3 id="_14">处理流程<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="mermaid">graph LR
+    A[ADC 数据&lt;br/&gt;N × M] --&gt; B[Range FFT&lt;br/&gt;沿快时间]
+    B --&gt; C[Range Profile&lt;br/&gt;N × M]
+    C --&gt; D[Doppler FFT&lt;br/&gt;沿慢时间]
+    D --&gt; E[Range-Doppler Map&lt;br/&gt;N × M]
+    E --&gt; F[CFAR 检测]
+    F --&gt; G[目标列表]</div>
+<h2 id="fmcw_3">FMCW 雷达参数设计<a class="headerlink" href="#fmcw_3" title="Permanent link">&para;</a></h2>
+<h3 id="_15">关键参数<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>符号</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中心频率</td>
+<td><span class="arithmatex">\(f_0\)</span></td>
+<td>波长、天线尺寸、分辨率</td>
+</tr>
+<tr>
+<td>带宽</td>
+<td><span class="arithmatex">\(B\)</span></td>
+<td>距离分辨率</td>
+</tr>
+<tr>
+<td>Chirp 时间</td>
+<td><span class="arithmatex">\(T_c\)</span></td>
+<td>最大距离、采样率要求</td>
+</tr>
+<tr>
+<td>Chirp 数量</td>
+<td><span class="arithmatex">\(N_c\)</span></td>
+<td>速度分辨率、帧率</td>
+</tr>
+<tr>
+<td>帧时间</td>
+<td><span class="arithmatex">\(T_f\)</span></td>
+<td>速度分辨率、更新率</td>
+</tr>
+<tr>
+<td>采样率</td>
+<td><span class="arithmatex">\(f_s\)</span></td>
+<td>最大距离、ADC 要求</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">距离相关参数<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><strong>距离分辨率</strong>：
+$$
+\Delta R = \frac{c}{2B}
+$$</p>
+<p><strong>最大距离</strong>：
+$$
+R_{max} = \frac{c \cdot f_s \cdot T_c}{4B}
+$$</p>
+<p><strong>距离 bin 数量</strong>：
+$$
+N_{range} = \frac{2B \cdot R_{max}}{c} = \frac{f_s \cdot T_c}{2}
+$$</p>
+<h3 id="_17">速度相关参数<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p><strong>速度分辨率</strong>：
+$$
+\Delta v = \frac{\lambda}{2T_f} = \frac{\lambda}{2N_c T_c}
+$$</p>
+<p><strong>最大速度</strong>（不模糊）：
+$$
+v_{max} = \frac{\lambda}{4T_c}
+$$</p>
+<p><strong>速度 bin 数量</strong>：
+$$
+N_{velocity} = N_c
+$$</p>
+<h3 id="_18">设计权衡<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>距离与采样率</strong></li>
+<li>更大的 <span class="arithmatex">\(R_{max}\)</span> 需要更高的 <span class="arithmatex">\(f_s\)</span></li>
+<li>
+<p>ADC 性能和成本限制</p>
+</li>
+<li>
+<p><strong>速度与帧率</strong></p>
+</li>
+<li>更大的 <span class="arithmatex">\(v_{max}\)</span> 需要更短的 <span class="arithmatex">\(T_c\)</span></li>
+<li>
+<p>更好的速度分辨率需要更长的 <span class="arithmatex">\(T_f\)</span>（更多 chirp）</p>
+</li>
+<li>
+<p><strong>带宽与功耗</strong></p>
+</li>
+<li>更大的 <span class="arithmatex">\(B\)</span> 提供更好的距离分辨率</li>
+<li>但增加功耗和复杂度</li>
+</ol>
+<h2 id="fmcw_4">FMCW 雷达的优势<a class="headerlink" href="#fmcw_4" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 低峰值功率<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>连续发射，平均功率等于峰值功率</li>
+<li>功放设计简单，成本低</li>
+<li>适合集成电路实现</li>
+</ul>
+<h3 id="2">2. 同时测距测速<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>通过 2D-FFT 同时获得距离和速度</li>
+<li>无需额外的测量周期</li>
+</ul>
+<h3 id="3">3. 高距离分辨率<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>大带宽易于实现（毫米波）</li>
+<li>可达厘米级甚至毫米级分辨率</li>
+</ul>
+<h3 id="4">4. 低截获概率<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>信号能量分散在时间和频率上</li>
+<li>难以被截获和干扰</li>
+</ul>
+<h3 id="5">5. 抗干扰能力<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>窄带干扰只影响部分频率</li>
+<li>可通过信号处理抑制</li>
+</ul>
+<h2 id="fmcw_5">FMCW 雷达的挑战<a class="headerlink" href="#fmcw_5" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 频率非线性<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：实际 chirp 的频率并非完全线性</p>
+<p><strong>影响</strong>：</p>
+<ul>
+<li>距离旁瓣升高</li>
+<li>分辨率下降</li>
+<li>虚假目标</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>高精度频率源（PLL）</li>
+<li>频率校准和补偿</li>
+<li>非线性校正算法</li>
+</ul>
+<h3 id="2_1">2. 发射泄漏<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：发射信号直接泄漏到接收通道</p>
+<p><strong>影响</strong>：</p>
+<ul>
+<li>饱和接收机</li>
+<li>近距离盲区</li>
+<li>动态范围降低</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>收发隔离设计</li>
+<li>自适应对消</li>
+<li>数字域补偿</li>
+</ul>
+<h3 id="3_1">3. 相位噪声<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：本振相位噪声</p>
+<p><strong>影响</strong>：</p>
+<ul>
+<li>距离和速度测量误差</li>
+<li>弱目标被噪声淹没</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>高质量振荡器</li>
+<li>相位噪声补偿算法</li>
+</ul>
+<h3 id="4_1">4. 多径效应<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：信号经多条路径到达目标</p>
+<p><strong>影响</strong>：</p>
+<ul>
+<li>虚假目标</li>
+<li>测量误差</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>波束形成</li>
+<li>多径抑制算法</li>
+<li>MIMO 技术</li>
+</ul>
+<h2 id="_19">实际应用示例<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<h3 id="1_2">示例 1：汽车雷达参数<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<p><strong>需求</strong>：</p>
+<ul>
+<li>探测距离：0.5 ~ 200 m</li>
+<li>距离分辨率：&lt; 5 cm</li>
+<li>速度范围：-100 ~ +100 km/h</li>
+<li>速度分辨率：&lt; 0.5 km/h</li>
+</ul>
+<p><strong>参数设计</strong>：</p>
+<ol>
+<li>
+<p><strong>距离分辨率</strong>确定带宽：
+   $<span class="arithmatex">\(B \geq \frac{c}{2\Delta R} = \frac{3 \times 10^8}{2 \times 0.05} = 3 \text{ GHz}\)</span>$
+   选择 <span class="arithmatex">\(B = 4\)</span> GHz</p>
+</li>
+<li>
+<p><strong>最大距离</strong>确定采样率（假设 <span class="arithmatex">\(T_c = 50\)</span> μs）：
+   $<span class="arithmatex">\(f_s \geq \frac{4B R_{max}}{c T_c} = \frac{4 \times 4 \times 10^9 \times 200}{3 \times 10^8 \times 50 \times 10^{-6}} = 213.3 \text{ MHz}\)</span>$
+   选择 <span class="arithmatex">\(f_s = 250\)</span> MHz</p>
+</li>
+<li>
+<p><strong>速度分辨率</strong>确定帧时间（<span class="arithmatex">\(\lambda = 3.9\)</span> mm）：
+   $<span class="arithmatex">\(T_f \geq \frac{\lambda}{2\Delta v} = \frac{0.0039}{2 \times 0.14} = 14 \text{ ms}\)</span>$
+   选择 <span class="arithmatex">\(T_f = 50\)</span> ms（对应帧率 20 Hz）</p>
+</li>
+<li>
+<p><strong>Chirp 数量</strong>：
+   $<span class="arithmatex">\(N_c = \frac{T_f}{T_c} = \frac{50 \times 10^{-3}}{50 \times 10^{-6}} = 1000\)</span>$</p>
+</li>
+</ol>
+<h3 id="277-ghz">示例 2：77 GHz 雷达配置<a class="headerlink" href="#277-ghz" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中心频率</td>
+<td>77 GHz</td>
+</tr>
+<tr>
+<td>带宽</td>
+<td>4 GHz</td>
+</tr>
+<tr>
+<td>Chirp 时间</td>
+<td>50 μs</td>
+</tr>
+<tr>
+<td>Chirp 数量</td>
+<td>128</td>
+</tr>
+<tr>
+<td>帧时间</td>
+<td>40 ms</td>
+</tr>
+<tr>
+<td>采样率</td>
+<td>10 MHz</td>
+</tr>
+<tr>
+<td>采样点数</td>
+<td>512</td>
+</tr>
+</tbody>
+</table>
+<p><strong>性能</strong>：</p>
+<ul>
+<li>距离分辨率：3.75 cm</li>
+<li>最大距离：191 m</li>
+<li>速度分辨率：0.49 km/h</li>
+<li>最大速度：±98 km/h</li>
+</ul>
+<h2 id="ti-mmwave-sdk-fmcw">TI mmWave SDK 中的 FMCW<a class="headerlink" href="#ti-mmwave-sdk-fmcw" title="Permanent link">&para;</a></h2>
+<h3 id="chirp_3">Chirp 配置<a class="headerlink" href="#chirp_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Chirp 参数配置</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">rlProfileCfg_t</span><span class="w"> </span><span class="n">profileCfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p">.</span><span class="n">profileId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p">.</span><span class="n">startFreq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">77.0</span><span class="p">,</span><span class="w">        </span><span class="c1">// GHz</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="p">.</span><span class="n">idleTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w">          </span><span class="c1">// μs</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">.</span><span class="n">adcStartTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.0</span><span class="p">,</span><span class="w">      </span><span class="c1">// μs</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">.</span><span class="n">rampEndTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span><span class="w">      </span><span class="c1">// μs</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">.</span><span class="n">txOutPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">          </span><span class="c1">// dB</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">.</span><span class="n">txPhaseShifter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="c1">// degrees</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">.</span><span class="n">freqSlopeConst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span><span class="w">   </span><span class="c1">// MHz/μs</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p">.</span><span class="n">txStartTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">         </span><span class="c1">// μs</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">.</span><span class="n">numAdcSamples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="p">.</span><span class="n">digOutSampleRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="c1">// ksps</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="p">.</span><span class="n">hpfCornerFreq1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">.</span><span class="n">hpfCornerFreq2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">.</span><span class="n">rxGain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">              </span><span class="c1">// dB</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">};</span>
+</code></pre></div>
+<h3 id="frame">Frame 配置<a class="headerlink" href="#frame" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Frame 参数配置</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">rlFrameCfg_t</span><span class="w"> </span><span class="n">frameCfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p">.</span><span class="n">chirpStartIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">.</span><span class="n">chirpEndIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">.</span><span class="n">numLoops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="p">.</span><span class="n">numFrames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">           </span><span class="c1">// 连续模式</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">.</span><span class="n">framePeriodicity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">   </span><span class="c1">// ms</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">.</span><span class="n">triggerSelect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">       </span><span class="c1">// SW trigger</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">.</span><span class="n">frameTriggerDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1">// μs</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">};</span>
+</code></pre></div>
+<hr />
+<h2 id="_20">📚 延伸学习<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">相关章节</p>
+<p>继续深入学习 FMCW 雷达的其他重要概念：</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>主题</th>
+<th>链接</th>
+<th>内容简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>信号处理</strong></td>
+<td><a href="../signal-processing/">signal-processing.md</a></td>
+<td>深入 FMCW 信号处理算法</td>
+</tr>
+<tr>
+<td><strong>目标检测</strong></td>
+<td><a href="../target-detection/">target-detection.md</a></td>
+<td>了解 CFAR 检测方法</td>
+</tr>
+<tr>
+<td><strong>IWR1443 硬件</strong></td>
+<td><a href="../../iwr1443/hardware/">../iwr1443/hardware.md</a></td>
+<td>学习 TI 雷达平台</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_21">参考资料<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Rohling, H. (2014). "Radar CFAR Thresholding in Clutter and Multiple Target Situations". <em>IEEE Transactions on Aerospace and Electronic Systems</em>.</li>
+<li>Texas Instruments. (2017). <em>mmWave Radar Sensors</em>. Application Report.</li>
+<li>Patole, S. M., et al. (2017). "Automotive Radars: A Review of Signal Processing Techniques". <em>IEEE Signal Processing Magazine</em>.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 matreshka15 | mmWave Insight
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/libs/polyfill.min.js"></script>
+      
+        <script src="../../javascripts/libs/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/libs/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

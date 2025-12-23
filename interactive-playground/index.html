@@ -1,0 +1,2434 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Deep Dive into mmWave Radar Technology | 深入毫米波雷达技术">
+      
+      
+        <meta name="author" content="mmWave Radar Community">
+      
+      
+        <link rel="canonical" href="https://matreshka15.github.io/mmWave_Insight/interactive-playground/">
+      
+      
+        <link rel="prev" href="../mmwave/target-detection/">
+      
+      
+        <link rel="next" href="../exercises/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>交互式游乐场 - mmWave Insight</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="mmWave Insight" class="md-header__button md-logo" aria-label="mmWave Insight" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mmWave Insight
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              交互式游乐场
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/matreshka15/mmWave_Insight" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matreshka15/mmWave_Insight
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../radar-basics/overview/" class="md-tabs__link">
+          
+  
+  
+  📚 基础入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../mmwave/fmcw/" class="md-tabs__link">
+          
+  
+  
+  🔬 进阶理论
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  🎮 互动学习
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../iwr1443/hardware/" class="md-tabs__link">
+          
+  
+  
+  🛠️ 硬件平台
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../image-gallery/" class="md-tabs__link">
+          
+  
+  
+  📖 附加资源
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="mmWave Insight" class="md-nav__button md-logo" aria-label="mmWave Insight" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    mmWave Insight
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/matreshka15/mmWave_Insight" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matreshka15/mmWave_Insight
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 主页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 基础入门
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 基础入门
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../radar-basics/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达原理概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../radar-basics/radar-equation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达方程详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../radar-basics/doppler-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    多普勒效应
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔬 进阶理论
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔬 进阶理论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mmwave/fmcw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FMCW 调制原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mmwave/signal-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理技术
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mmwave/target-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    目标检测算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎮 互动学习
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎮 互动学习
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交互式游乐场
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交互式游乐场
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-fmcw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 1. FMCW 雷达测距模拟器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 1. FMCW 雷达测距模拟器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 交互式参数调整
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 可视化频率-时间图
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📐 2. 雷达方程计算器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📐 2. 雷达方程计算器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 参数输入区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 探测距离可视化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌊 3. 多普勒效应模拟器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌊 3. 多普勒效应模拟器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚗 场景设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎭 不同场景对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📡 4. FFT 频谱分析工具
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📡 4. FFT 频谱分析工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎵 信号合成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 FFT 变换过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 5. 测距精度分析器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 5. 测距精度分析器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 精度影响因素
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎲 精度计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧮 6. 快速计算工具箱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧮 6. 快速计算工具箱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ 速查计算器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 互动学习路径
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 进阶挑战
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 学习建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    练习题库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ 硬件平台
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🛠️ 硬件平台
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iwr1443/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IWR1443 硬件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iwr1443/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    开发环境搭建
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📖 附加资源
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📖 附加资源
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-gallery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图片库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    参考资料
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-fmcw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 1. FMCW 雷达测距模拟器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 1. FMCW 雷达测距模拟器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 交互式参数调整
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 可视化频率-时间图
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📐 2. 雷达方程计算器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📐 2. 雷达方程计算器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 参数输入区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 探测距离可视化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌊 3. 多普勒效应模拟器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌊 3. 多普勒效应模拟器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚗 场景设置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎭 不同场景对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📡 4. FFT 频谱分析工具
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📡 4. FFT 频谱分析工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎵 信号合成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 FFT 变换过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 5. 测距精度分析器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 5. 测距精度分析器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 精度影响因素
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎲 精度计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧮 6. 快速计算工具箱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧮 6. 快速计算工具箱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ 速查计算器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 互动学习路径
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 进阶挑战
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 学习建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">🎮 互动游乐场<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">欢迎来到交互区</p>
+<p>在这里，你可以通过可视化的交互式工具，直观地理解毫米波雷达的关键概念。动手调整参数，观察结果变化，让学习变得更有趣！</p>
+</div>
+<hr />
+<h2 id="1-fmcw">🎯 1. FMCW 雷达测距模拟器<a class="headerlink" href="#1-fmcw" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">学习目标</p>
+<p>理解 FMCW 雷达的测距原理，观察 Chirp 信号和拍频的关系</p>
+</div>
+<h3 id="_2">📊 交互式参数调整<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="interactive-section">
+<p>试着调整下面的参数，观察测距结果的变化：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>符号</th>
+<th>默认值</th>
+<th>调整范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>起始频率</td>
+<td><span class="arithmatex">\(f_0\)</span></td>
+<td>77 GHz</td>
+<td>76-81 GHz</td>
+</tr>
+<tr>
+<td>带宽</td>
+<td><span class="arithmatex">\(B\)</span></td>
+<td>4 GHz</td>
+<td>1-4 GHz</td>
+</tr>
+<tr>
+<td>Chirp 时间</td>
+<td><span class="arithmatex">\(T_c\)</span></td>
+<td>40 μs</td>
+<td>20-100 μs</td>
+</tr>
+<tr>
+<td>目标距离</td>
+<td><span class="arithmatex">\(R\)</span></td>
+<td>50 m</td>
+<td>1-200 m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="example">
+<summary>模拟步骤</summary>
+<p><strong>步骤 1：计算斜率</strong></p>
+<div class="arithmatex">\[
+S = \frac{B}{T_c} = \frac{4 \times 10^9}{40 \times 10^{-6}} = 10^{14} \text{ Hz/s}
+\]</div>
+<p><strong>步骤 2：计算延迟时间</strong></p>
+<div class="arithmatex">\[
+\tau = \frac{2R}{c} = \frac{2 \times 50}{3 \times 10^8} = 3.33 \times 10^{-7} \text{ s}
+\]</div>
+<p><strong>步骤 3：计算拍频</strong></p>
+<div class="arithmatex">\[
+f_{beat} = S \tau = 10^{14} \times 3.33 \times 10^{-7} = 33.3 \text{ kHz}
+\]</div>
+<p><strong>步骤 4：验证距离</strong></p>
+<div class="arithmatex">\[
+R = \frac{c \cdot f_{beat}}{2S} = \frac{3 \times 10^8 \times 33.3 \times 10^3}{2 \times 10^{14}} = 50 \text{ m} \quad \checkmark
+\]</div>
+</details>
+<h3 id="-">🎨 可视化频率-时间图<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
+<div class="mermaid">graph TD
+    A[发射信号 Tx&lt;br/&gt;频率线性增加] --&gt;|延迟 τ| B[接收信号 Rx&lt;br/&gt;频率延迟增加]
+    B --&gt; C[混频器]
+    A --&gt; C
+    C --&gt; D[拍频信号&lt;br/&gt;频率 = S×τ]
+    D --&gt; E[FFT 处理]
+    E --&gt; F[距离信息]
+
+    style A fill:#e3f2fd
+    style B fill:#ffebee
+    style D fill:#fff9c4
+    style F fill:#c8e6c9</div>
+<div class="admonition question">
+<p class="admonition-title">互动练习</p>
+<p><strong>挑战 1</strong>：如果目标距离加倍（100 m），拍频会如何变化？
+<strong>挑战 2</strong>：如果带宽减半（2 GHz），距离分辨率会受到什么影响？</p>
+<details class="success">
+<summary>答案</summary>
+<p><strong>挑战 1</strong>：拍频加倍，变为 66.6 kHz（因为 <span class="arithmatex">\(f_{beat} \propto R\)</span>）
+<strong>挑战 2</strong>：距离分辨率变差，从 3.75 cm 变为 7.5 cm（因为 <span class="arithmatex">\(\Delta R = \frac{c}{2B}\)</span>）</p>
+</details>
+</div>
+<hr />
+<h2 id="2">📐 2. 雷达方程计算器<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">学习目标</p>
+<p>直观理解各参数对雷达性能的影响，计算实际探测距离</p>
+</div>
+<h3 id="_3">🔧 参数输入区<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="calculator-section">
+<p><strong>系统参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>数值</th>
+<th>单位</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发射功率 <span class="arithmatex">\(P_t\)</span></td>
+<td>10</td>
+<td>mW</td>
+<td>典型值 10-100 mW</td>
+</tr>
+<tr>
+<td>天线增益 <span class="arithmatex">\(G_t\)</span></td>
+<td>20</td>
+<td>dBi</td>
+<td>高增益定向天线</td>
+</tr>
+<tr>
+<td>接收增益 <span class="arithmatex">\(G_r\)</span></td>
+<td>20</td>
+<td>dBi</td>
+<td>与发射天线相同</td>
+</tr>
+<tr>
+<td>工作频率 <span class="arithmatex">\(f\)</span></td>
+<td>77</td>
+<td>GHz</td>
+<td>汽车雷达频段</td>
+</tr>
+<tr>
+<td>目标 RCS <span class="arithmatex">\(\sigma\)</span></td>
+<td>10</td>
+<td>m²</td>
+<td>轿车典型值</td>
+</tr>
+<tr>
+<td>系统损耗 <span class="arithmatex">\(L\)</span></td>
+<td>6</td>
+<td>dB</td>
+<td>包含各种损耗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>环境参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>距离 <span class="arithmatex">\(R\)</span></td>
+<td>100</td>
+<td>测试距离（m）</td>
+</tr>
+<tr>
+<td>接收灵敏度</td>
+<td>-100</td>
+<td>最小可检测功率（dBm）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="example">
+<summary>计算过程</summary>
+<p><strong>应用雷达方程</strong>：</p>
+<div class="arithmatex">\[
+P_r = \frac{P_t G_t G_r \lambda^2 \sigma}{(4\pi)^3 R^4 L}
+\]</div>
+<p><strong>代入数值</strong>：</p>
+<ul>
+<li>波长：<span class="arithmatex">\(\lambda = \frac{c}{f} = \frac{3 \times 10^8}{77 \times 10^9} = 3.9\)</span> mm</li>
+<li>线性增益：<span class="arithmatex">\(G_t = G_r = 10^{20/10} = 100\)</span></li>
+<li>线性损耗：<span class="arithmatex">\(L = 10^{6/10} = 4\)</span></li>
+</ul>
+<div class="arithmatex">\[
+P_r = \frac{0.01 \times 100 \times 100 \times (0.0039)^2 \times 10}{(4\pi)^3 \times (100)^4 \times 4}
+\]</div>
+<div class="arithmatex">\[
+P_r \approx 2.4 \times 10^{-12} \text{ W} = -86.2 \text{ dBm}
+\]</div>
+<p>✅ <strong>结论</strong>：接收功率 -86.2 dBm &gt; 灵敏度 -100 dBm，<strong>可以检测</strong>！</p>
+</details>
+<h3 id="_4">📊 探测距离可视化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="mermaid">graph LR
+    A[发射功率&lt;br/&gt;↑ 增加] --&gt; E[探测距离&lt;br/&gt;↑ 增加]
+    B[天线增益&lt;br/&gt;↑ 提高] --&gt; E
+    C[目标 RCS&lt;br/&gt;↑ 增大] --&gt; E
+    D[系统损耗&lt;br/&gt;↓ 减小] --&gt; E
+
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff9c4
+    style D fill:#ffebee
+    style E fill:#c8e6c9</div>
+<div class="admonition question">
+<p class="admonition-title">互动挑战</p>
+<p><strong>场景 1</strong>：如果发射功率提高到 20 mW，最大探测距离会增加多少？
+<strong>场景 2</strong>：天线增益每增加 3 dB，探测距离增加多少倍？</p>
+<details class="success">
+<summary>答案提示</summary>
+<p><strong>场景 1</strong>：功率加倍 → 距离增加约 <span class="arithmatex">\(\sqrt[4]{2} \approx 1.19\)</span> 倍（根据 <span class="arithmatex">\(R \propto P_t^{1/4}\)</span>）
+<strong>场景 2</strong>：3 dB ≈ 2 倍 → 距离增加约 <span class="arithmatex">\(\sqrt{2} \approx 1.41\)</span> 倍（因为 <span class="arithmatex">\(R \propto \sqrt{G}\)</span>）</p>
+</details>
+</div>
+<hr />
+<h2 id="3">🌊 3. 多普勒效应模拟器<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">学习目标</p>
+<p>体验多普勒频移，理解速度测量原理</p>
+</div>
+<h3 id="_5">🚗 场景设置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="doppler-section">
+<p><strong>移动目标参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>雷达频率 <span class="arithmatex">\(f_0\)</span></td>
+<td>77 GHz</td>
+<td>毫米波频段</td>
+</tr>
+<tr>
+<td>目标速度 <span class="arithmatex">\(v\)</span></td>
+<td>30 m/s</td>
+<td>约 108 km/h</td>
+</tr>
+<tr>
+<td>运动方向</td>
+<td>接近/远离</td>
+<td>影响频移正负</td>
+</tr>
+</tbody>
+</table>
+<p><strong>计算多普勒频移</strong>：</p>
+<div class="arithmatex">\[
+f_d = \frac{2v}{\lambda} = \frac{2v \cdot f_0}{c} = \frac{2 \times 30 \times 77 \times 10^9}{3 \times 10^8} = 15.4 \text{ kHz}
+\]</div>
+</div>
+<h3 id="_6">🎭 不同场景对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>速度 (km/h)</th>
+<th>多普勒频移 (kHz)</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🚶 行人</td>
+<td>5</td>
+<td>0.86</td>
+<td>低速移动</td>
+</tr>
+<tr>
+<td>🚴 自行车</td>
+<td>20</td>
+<td>3.43</td>
+<td>中速移动</td>
+</tr>
+<tr>
+<td>🚗 轿车</td>
+<td>60</td>
+<td>10.28</td>
+<td>城市道路</td>
+</tr>
+<tr>
+<td>🏎️ 跑车</td>
+<td>120</td>
+<td>20.57</td>
+<td>高速公路</td>
+</tr>
+<tr>
+<td>✈️ 飞机</td>
+<td>250</td>
+<td>42.86</td>
+<td>航空应用</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">graph TD
+    A[目标接近雷达] --&gt;|正多普勒| B[频率上移&lt;br/&gt;fd &gt; 0]
+    C[目标远离雷达] --&gt;|负多普勒| D[频率下移&lt;br/&gt;fd &lt; 0]
+    E[目标横向运动] --&gt;|零多普勒| F[频率不变&lt;br/&gt;fd = 0]
+
+    B --&gt; G[速度 v = fd·λ/2]
+    D --&gt; G
+
+    style A fill:#c8e6c9
+    style C fill:#ffebee
+    style E fill:#e0e0e0
+    style G fill:#fff9c4</div>
+<div class="admonition question">
+<p class="admonition-title">互动挑战</p>
+<p><strong>问题 1</strong>：两辆车相向而行，各以 60 km/h 行驶，雷达测得的相对速度是多少？
+<strong>问题 2</strong>：如果目标以 45° 角接近雷达，实际测得的多普勒频移会有什么变化？</p>
+<details class="success">
+<summary>答案</summary>
+<p><strong>问题 1</strong>：相对速度 = 60 + 60 = 120 km/h，多普勒频移 ≈ 20.57 kHz
+<strong>问题 2</strong>：测得频移 = <span class="arithmatex">\(f_d \cos(45°) = 0.707 f_d\)</span>（径向速度分量）</p>
+</details>
+</div>
+<hr />
+<h2 id="4-fft">📡 4. FFT 频谱分析工具<a class="headerlink" href="#4-fft" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">学习目标</p>
+<p>理解 FFT 在雷达信号处理中的作用，观察时域信号转换为频域</p>
+</div>
+<h3 id="_7">🎵 信号合成<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="fft-section">
+<p><strong>合成三个目标的回波信号</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>距离 (m)</th>
+<th>拍频 (kHz)</th>
+<th>振幅</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标 1</td>
+<td>30</td>
+<td>20</td>
+<td>1.0</td>
+<td>🔴 红色</td>
+</tr>
+<tr>
+<td>目标 2</td>
+<td>50</td>
+<td>33.3</td>
+<td>0.8</td>
+<td>🔵 蓝色</td>
+</tr>
+<tr>
+<td>目标 3</td>
+<td>80</td>
+<td>53.3</td>
+<td>0.5</td>
+<td>🟢 绿色</td>
+</tr>
+</tbody>
+</table>
+<p><strong>时域信号</strong>：</p>
+<div class="arithmatex">\[
+s(t) = 1.0 \cos(2\pi \times 20000 t) + 0.8 \cos(2\pi \times 33300 t) + 0.5 \cos(2\pi \times 53300 t)
+\]</div>
+</div>
+<h3 id="fft">📈 FFT 变换过程<a class="headerlink" href="#fft" title="Permanent link">&para;</a></h3>
+<div class="mermaid">graph LR
+    A[时域信号&lt;br/&gt;混合波形] --&gt;|FFT| B[频域频谱&lt;br/&gt;三个峰值]
+    B --&gt; C[峰值检测&lt;br/&gt;20, 33.3, 53.3 kHz]
+    C --&gt; D[距离计算&lt;br/&gt;30, 50, 80 m]
+
+    style A fill:#e3f2fd
+    style B fill:#fff9c4
+    style C fill:#f3e5f5
+    style D fill:#c8e6c9</div>
+<div class="admonition example">
+<p class="admonition-title">频谱特征</p>
+<p><strong>FFT 点数</strong>：1024 点
+<strong>采样率</strong>：200 kHz
+<strong>频率分辨率</strong>：200/1024 ≈ 195.3 Hz
+<strong>距离分辨率</strong>：<span class="arithmatex">\(\Delta R = \frac{c}{2B} = 3.75\)</span> cm</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">互动练习</p>
+<p><strong>挑战</strong>：如果再加入一个距离 31 m 的目标（拍频 20.67 kHz），能否被正确分辨？</p>
+<details class="success">
+<summary>分析</summary>
+<p><strong>频率间隔</strong>：20.67 - 20 = 0.67 kHz &gt; 195.3 Hz（频率分辨率）
+<strong>距离间隔</strong>：31 - 30 = 1 m &gt; 3.75 cm（距离分辨率）
+<strong>结论</strong>：✅ 可以分辨！两个目标的峰值会清晰分开</p>
+</details>
+</div>
+<hr />
+<h2 id="5">🎯 5. 测距精度分析器<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">学习目标</p>
+<p>理解影响测距精度的各种因素，优化系统设计</p>
+</div>
+<h3 id="_8">📊 精度影响因素<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="accuracy-section">
+<table>
+<thead>
+<tr>
+<th>影响因素</th>
+<th>影响机制</th>
+<th>优化方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>带宽 B</strong></td>
+<td>更大带宽 → 更高分辨率</td>
+<td>⬆️ 增加调制带宽</td>
+</tr>
+<tr>
+<td><strong>采样率</strong></td>
+<td>更高采样率 → 更宽频率范围</td>
+<td>⬆️ 提高 ADC 速率</td>
+</tr>
+<tr>
+<td><strong>SNR</strong></td>
+<td>更高信噪比 → 更准确的峰值检测</td>
+<td>⬆️ 增加发射功率或积分时间</td>
+</tr>
+<tr>
+<td><strong>FFT 点数</strong></td>
+<td>更多点数 → 更精细的频率分辨率</td>
+<td>⬆️ 增加 FFT 长度</td>
+</tr>
+<tr>
+<td><strong>非线性</strong></td>
+<td>Chirp 非线性 → 拍频误差</td>
+<td>🔧 校准 PLL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="_9">🎲 精度计算<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">实际案例</p>
+<p><strong>系统配置</strong>：</p>
+<ul>
+<li>带宽 <span class="arithmatex">\(B\)</span> = 4 GHz</li>
+<li>Chirp 时间 <span class="arithmatex">\(T_c\)</span> = 40 μs</li>
+<li>FFT 点数 <span class="arithmatex">\(N\)</span> = 256</li>
+<li>采样率 <span class="arithmatex">\(f_s\)</span> = 5 MHz</li>
+</ul>
+<p><strong>理论分辨率</strong>：</p>
+<div class="arithmatex">\[
+\Delta R = \frac{c}{2B} = \frac{3 \times 10^8}{2 \times 4 \times 10^9} = 3.75 \text{ cm}
+\]</div>
+<p><strong>频率分辨率</strong>：</p>
+<div class="arithmatex">\[
+\Delta f = \frac{f_s}{N} = \frac{5 \times 10^6}{256} = 19.53 \text{ kHz}
+\]</div>
+<p><strong>实际距离分辨率</strong>：</p>
+<div class="arithmatex">\[
+\Delta R_{actual} = \frac{c \Delta f}{2S} = \frac{3 \times 10^8 \times 19.53 \times 10^3}{2 \times 10^{14}} = 29.3 \text{ cm}
+\]</div>
+</div>
+<div class="mermaid">graph TD
+    A[增加带宽 B] --&gt; E[提高分辨率]
+    B[增加 FFT 点数 N] --&gt; E
+    C[提高 SNR] --&gt; F[提高精度]
+    D[线性度校准] --&gt; F
+    E --&gt; G[优秀雷达性能]
+    F --&gt; G
+
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff9c4
+    style D fill:#ffe0b2
+    style G fill:#c8e6c9</div>
+<hr />
+<h2 id="6">🧮 6. 快速计算工具箱<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">实用工具</p>
+<p>快速计算常用的雷达参数</p>
+</div>
+<h3 id="_10">⚡ 速查计算器<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">波长计算</label><label for="__tabbed_1_2">距离分辨率</label><label for="__tabbed_1_3">速度分辨率</label><label for="__tabbed_1_4">最大不模糊距离</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>已知频率 → 计算波长</strong></p>
+<div class="arithmatex">\[
+\lambda = \frac{c}{f}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>频率 (GHz)</th>
+<th>波长 (mm)</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24</td>
+<td>12.5</td>
+<td>ISM 频段</td>
+</tr>
+<tr>
+<td>60</td>
+<td>5.0</td>
+<td>短距雷达</td>
+</tr>
+<tr>
+<td>77</td>
+<td>3.9</td>
+<td>汽车雷达</td>
+</tr>
+<tr>
+<td>79</td>
+<td>3.8</td>
+<td>高分辨率雷达</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong>已知带宽 → 计算分辨率</strong></p>
+<div class="arithmatex">\[
+\Delta R = \frac{c}{2B}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>带宽 (GHz)</th>
+<th>分辨率 (cm)</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>15.0</td>
+<td>低分辨率</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7.5</td>
+<td>中等分辨率</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3.75</td>
+<td>高分辨率</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1.875</td>
+<td>超高分辨率</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong>已知参数 → 计算速度分辨率</strong></p>
+<div class="arithmatex">\[
+\Delta v = \frac{\lambda}{2 T_{frame}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>帧时间 (ms)</th>
+<th>速度分辨率 (m/s) @ 77GHz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>0.195</td>
+</tr>
+<tr>
+<td>40</td>
+<td>0.049</td>
+</tr>
+<tr>
+<td>100</td>
+<td>0.020</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong>采样率 → 最大距离</strong></p>
+<div class="arithmatex">\[
+R_{max} = \frac{c \cdot f_s}{2S}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>采样率 (MHz)</th>
+<th>最大距离 (m)</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.5</td>
+<td>25</td>
+<td>短距</td>
+</tr>
+<tr>
+<td>5.0</td>
+<td>50</td>
+<td>中距</td>
+</tr>
+<tr>
+<td>10.0</td>
+<td>100</td>
+<td>远距</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="_11">🎓 互动学习路径<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<div class="admonition success">
+<p class="admonition-title">完成进度追踪</p>
+<p>勾选你已经掌握的互动模块：</p>
+<ul>
+<li>[ ] ✅ FMCW 测距模拟器 - 理解测距原理</li>
+<li>[ ] ✅ 雷达方程计算器 - 计算探测性能</li>
+<li>[ ] ✅ 多普勒效应模拟器 - 理解速度测量</li>
+<li>[ ] ✅ FFT 频谱分析 - 信号处理基础</li>
+<li>[ ] ✅ 测距精度分析 - 系统优化</li>
+<li>[ ] ✅ 快速计算工具箱 - 工程应用</li>
+</ul>
+</div>
+<hr />
+<h2 id="_12">🚀 进阶挑战<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">综合应用题</p>
+<p><strong>场景</strong>：设计一个汽车防撞雷达系统</p>
+<p><strong>要求</strong>：</p>
+<ol>
+<li>探测距离：200 m</li>
+<li>距离分辨率：&lt; 10 cm</li>
+<li>速度测量范围：-50 ~ +50 m/s</li>
+<li>速度分辨率：&lt; 0.1 m/s</li>
+</ol>
+<p><strong>任务</strong>：</p>
+<ul>
+<li>确定工作频率和带宽</li>
+<li>设计 Chirp 参数（Tc, B, S）</li>
+<li>计算所需天线增益</li>
+<li>选择 ADC 采样率和 FFT 点数</li>
+</ul>
+<details class="success">
+<summary>设计方案参考</summary>
+<p><strong>频率选择</strong>：77 GHz（标准汽车雷达频段）
+<strong>带宽</strong>：B = 4 GHz（满足 <span class="arithmatex">\(\Delta R = \frac{c}{2B} = 3.75\)</span> cm &lt; 10 cm）
+<strong>Chirp 时间</strong>：Tc = 40 μs
+<strong>斜率</strong>：S = B/Tc = 10¹⁴ Hz/s
+<strong>采样率</strong>：fs = 10 MHz（满足最大距离需求）
+<strong>FFT 点数</strong>：N = 512（平衡分辨率与计算量）
+<strong>天线增益</strong>：Gt = Gr = 20 dBi（满足 200 m 探测距离）</p>
+</details>
+</div>
+<hr />
+<h2 id="_13">💡 学习建议<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">如何使用互动游乐场</p>
+<ol>
+<li><strong>动手实践</strong>：不要只是看，亲自调整参数试试</li>
+<li><strong>对比观察</strong>：改变一个参数，观察所有相关结果的变化</li>
+<li><strong>记录总结</strong>：把有趣的发现记录下来</li>
+<li><strong>举一反三</strong>：思考这些原理在其他场景的应用</li>
+<li><strong>提出问题</strong>：遇到不理解的地方，回到理论章节复习</li>
+</ol>
+</div>
+<div class="admonition question">
+<p class="admonition-title">需要帮助？</p>
+<p>如果在互动练习中遇到问题：</p>
+<ul>
+<li>📚 复习<a href="../radar-basics/overview/">雷达基础</a>章节</li>
+<li>🔬 深入学习<a href="../mmwave/fmcw/">FMCW 原理</a></li>
+<li>💬 在 <a href="https://github.com/matreshka15/mmWave_Insight/issues">GitHub Issues</a> 提问</li>
+</ul>
+</div>
+<hr />
+<div align="center">
+  <p><strong>🎉 享受探索的乐趣，在实践中掌握毫米波雷达技术！</strong></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 matreshka15 | mmWave Insight
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="../javascripts/libs/polyfill.min.js"></script>
+      
+        <script src="../javascripts/libs/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/libs/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

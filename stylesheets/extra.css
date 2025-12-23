@@ -1,0 +1,356 @@
+/* ===== mmWave Insight 自定义样式 ===== */
+
+/* 改进表格样式 */
+.md-typeset table:not([class]) {
+    border: 2px solid var(--md-primary-fg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.md-typeset table:not([class]) thead {
+    background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+}
+
+.md-typeset table:not([class]) th {
+    color: white !important;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: none;
+}
+
+.md-typeset table:not([class]) tbody tr:hover {
+    background-color: var(--md-default-fg-color--lightest);
+    transition: background-color 0.2s ease;
+}
+
+.md-typeset table:not([class]) td {
+    padding: 10px 16px;
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+/* 改进代码块样式 */
+.md-typeset pre > code {
+    border-radius: 8px;
+    border-left: 4px solid var(--md-accent-fg-color);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* 改进提示框样式 */
+.md-typeset .admonition,
+.md-typeset details {
+    border-radius: 8px;
+    border-left-width: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 数学公式高亮 */
+.md-typeset mjx-container {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: var(--md-code-bg-color);
+    margin: 0;
+}
+
+.md-typeset mjx-container[display="true"] {
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(63,81,181,0.05) 0%, rgba(0,150,136,0.05) 100%);
+    border-left: 4px solid var(--md-primary-fg-color);
+    margin: 16px 0;
+}
+
+/* 表格中数学公式样式优化 */
+.md-typeset table:not([class]) th mjx-container,
+.md-typeset table:not([class]) td mjx-container {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* 表头中数学公式文字颜色 */
+.md-typeset table:not([class]) th mjx-container {
+    color: white !important;
+}
+
+/* 表格中数学公式字体调整 */
+.md-typeset table mjx-container {
+    font-size: 0.9em;
+}
+
+/* 图片标题样式 */
+.md-typeset figure {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 24px 0;
+    background-color: var(--md-default-bg-color);
+}
+
+.md-typeset figure img {
+    border-bottom: 2px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset figcaption {
+    padding: 12px 16px;
+    font-style: italic;
+    color: var(--md-default-fg-color--light);
+    background-color: var(--md-code-bg-color);
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* 卡片网格增强 */
+.md-typeset .grid.cards > :is(ul, ol) {
+    display: grid;
+    gap: 16px;
+}
+
+.md-typeset .grid.cards > :is(ul, ol) > li {
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.md-typeset .grid.cards > :is(ul, ol) > li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* 按钮样式增强 */
+.md-typeset .md-button {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.md-typeset .md-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.md-typeset .md-button--primary {
+    background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+}
+
+/* Mermaid 图表样式 */
+.mermaid {
+    background-color: var(--md-code-bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 内联代码增强 */
+.md-typeset code {
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    background-color: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* 标题增强 */
+.md-typeset h1 {
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.md-typeset h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 1.2em;
+    background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+    margin-right: 12px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+/* 链接样式 */
+.md-typeset a {
+    transition: color 0.2s ease;
+}
+
+.md-typeset a:hover {
+    text-decoration-color: var(--md-accent-fg-color);
+}
+
+/* 列表样式增强 */
+.md-typeset ul li {
+    margin-bottom: 8px;
+}
+
+.md-typeset ul li::marker {
+    color: var(--md-accent-fg-color);
+}
+
+/* 分隔线样式 */
+.md-typeset hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--md-primary-fg-color) 50%, transparent 100%);
+    margin: 32px 0;
+}
+
+/* 引用块样式 */
+.md-typeset blockquote {
+    border-left-width: 4px;
+    border-left-color: var(--md-accent-fg-color);
+    background-color: var(--md-code-bg-color);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* 响应式优化 */
+@media screen and (max-width: 768px) {
+    .md-typeset table:not([class]) {
+        font-size: 0.85em;
+    }
+
+    .md-typeset .grid.cards > :is(ul, ol) {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 打印样式优化 */
+@media print {
+    .md-typeset .admonition,
+    .md-typeset details {
+        page-break-inside: avoid;
+    }
+
+    .md-typeset figure {
+        page-break-inside: avoid;
+    }
+}
+
+/* ===== 交互式游乐场专用样式 ===== */
+
+/* 交互区域容器 */
+.interactive-section,
+.calculator-section,
+.doppler-section,
+.fft-section,
+.accuracy-section {
+    background: linear-gradient(135deg, rgba(63,81,181,0.03) 0%, rgba(156,39,176,0.03) 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid var(--md-primary-fg-color--light);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* 交互式表格增强 */
+.interactive-section table,
+.calculator-section table,
+.doppler-section table,
+.fft-section table,
+.accuracy-section table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+[data-md-color-scheme="slate"] .interactive-section table,
+[data-md-color-scheme="slate"] .calculator-section table,
+[data-md-color-scheme="slate"] .doppler-section table,
+[data-md-color-scheme="slate"] .fft-section table,
+[data-md-color-scheme="slate"] .accuracy-section table {
+    background-color: var(--md-code-bg-color);
+}
+
+/* 参数调整提示 */
+.interactive-section::before {
+    content: "🎮 调整参数，观察变化";
+    display: block;
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+.calculator-section::before {
+    content: "🧮 计算器工具";
+    display: block;
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+/* 高亮数值单元格 */
+.md-typeset .interactive-section td:nth-child(3),
+.md-typeset .calculator-section td:nth-child(2) {
+    font-weight: 600;
+    color: var(--md-accent-fg-color);
+    background-color: rgba(63,81,181,0.05);
+}
+
+/* 进度追踪复选框样式 */
+.md-typeset input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--md-primary-fg-color);
+}
+
+/* Emoji 图标增强 */
+.md-typeset h2:has(🎯),
+.md-typeset h2:has(📐),
+.md-typeset h2:has(🌊),
+.md-typeset h2:has(📡),
+.md-typeset h2:has(🎯),
+.md-typeset h2:has(🧮) {
+    background: linear-gradient(90deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 互动挑战框样式 */
+.md-typeset .admonition.question {
+    border-left-color: #ff9800;
+    background: linear-gradient(135deg, rgba(255,152,0,0.05) 0%, rgba(255,193,7,0.05) 100%);
+}
+
+.md-typeset .admonition.question > .admonition-title {
+    background-color: rgba(255,152,0,0.1);
+}
+
+/* 成功/完成样式增强 */
+.md-typeset .admonition.success {
+    background: linear-gradient(135deg, rgba(76,175,80,0.05) 0%, rgba(139,195,74,0.05) 100%);
+}
+
+/* 学习路径图表增强 */
+.md-typeset div:has(> .mermaid) {
+    background: linear-gradient(135deg, rgba(63,81,181,0.02) 0%, rgba(0,150,136,0.02) 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 24px 0;
+}
+
+/* 响应式优化 - 移动端 */
+@media screen and (max-width: 768px) {
+    .interactive-section,
+    .calculator-section,
+    .doppler-section,
+    .fft-section,
+    .accuracy-section {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .interactive-section::before,
+    .calculator-section::before {
+        font-size: 0.85em;
+    }
+}
