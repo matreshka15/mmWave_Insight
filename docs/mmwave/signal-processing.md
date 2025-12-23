@@ -790,11 +790,16 @@ grid on;
 
 ---
 
-## 🔗 相关章节
+## 📚 延伸学习
 
-- ⬅️ 上一章：[FMCW 调制原理](fmcw.md)
-- ➡️ 下一章：[目标检测算法](target-detection.md)
-- 🏠 返回：[主页](../index.md)
+!!! info "相关章节"
+    继续深入学习雷达信号处理和目标检测的相关内容：
+
+| 主题 | 链接 | 内容简介 |
+|------|------|---------|
+| **FMCW 调制原理** | [fmcw.md](fmcw.md) | 回顾 FMCW 雷达的调制原理 |
+| **目标检测算法** | [target-detection.md](target-detection.md) | 学习 CFAR 检测方法 |
+| **IWR1443 硬件** | [../iwr1443/hardware.md](../iwr1443/hardware.md) | 了解 TI 雷达平台实现 |
 
 ---
 

@@ -50,19 +50,19 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          format: !!python/name:pymdownx.superfences.fence_div_format
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.arithmatex:
       generic: true
-  - pymdownx.tabbed:
-      alternate_style: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -80,8 +80,9 @@ extra_css:
 # Extra JavaScript
 extra_javascript:
   - javascripts/mathjax.js
-  - https://gcore.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://gcore.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+  - javascripts/libs/polyfill.min.js
+  - javascripts/libs/tex-mml-chtml.js
+  - javascripts/libs/mermaid.min.js
   - javascripts/mermaid-init.js
 
 # Page tree

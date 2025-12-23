@@ -101,7 +101,7 @@ $$
 \boxed{s_t(t) = A_t \cos\left[2\pi\left(f_0 t + \frac{S t^2}{2}\right) + \phi_0\right]}
 $$
 
-![FMCW 频率波形](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/FMCW_Fwave.png)
+![FMCW 频率波形](../images/fmcw/FMCW_Fwave.png)
 
 > 📊 FMCW Chirp 信号的频率-时间特性：频率随时间线性增加
 
@@ -151,7 +151,7 @@ graph LR
 
 === "步骤 3：混频得到拍频"
 
-    ![FMCW 测距原理](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/FMCW.png)
+    ![FMCW 测距原理](../images/fmcw/FMCW.png)
 
     *📈 FMCW 测距原理图解：发射信号（蓝色）和接收信号（红色）之间的频率差即为拍频*
 
@@ -324,7 +324,7 @@ $$
 
 发射多个连续的 chirp，形成一个帧（frame）：
 
-![Frame 结构](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/defineaframe.png)
+![Frame 结构](../images/fmcw/defineaframe.png)
 
 > 图：一个 Frame 由多个 Chirp 组成，用于多普勒分析
 
@@ -336,7 +336,7 @@ $$
 
 使用三角波调制（up-chirp 和 down-chirp）：
 
-![三角波 FMCW](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/speedmes.png)
+![三角波 FMCW](../images/fmcw/speedmes.png)
 
 > 图：三角波调制的 FMCW 信号用于同时测距和测速
 
@@ -417,7 +417,7 @@ $$
 
 结果：**Range-Doppler Map**（距离-多普勒图）
 
-![角度 FFT 处理](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/angleFFT.png)
+![角度 FFT 处理](../images/fmcw/angleFFT.png)
 
 > 图：多维 FFT 处理流程，包括距离、速度和角度维度
 
@@ -673,11 +673,16 @@ rlFrameCfg_t frameCfg = {
 
 ---
 
-## 下一步
+## 📚 延伸学习
 
-- [信号处理](signal-processing.md) - 深入 FMCW 信号处理算法
-- [目标检测](target-detection.md) - 了解 CFAR 检测方法
-- [IWR1443 硬件](../iwr1443/hardware.md) - 学习 TI 雷达平台
+!!! info "相关章节"
+    继续深入学习 FMCW 雷达的其他重要概念：
+
+| 主题 | 链接 | 内容简介 |
+|------|------|---------|
+| **信号处理** | [signal-processing.md](signal-processing.md) | 深入 FMCW 信号处理算法 |
+| **目标检测** | [target-detection.md](target-detection.md) | 了解 CFAR 检测方法 |
+| **IWR1443 硬件** | [../iwr1443/hardware.md](../iwr1443/hardware.md) | 学习 TI 雷达平台 |
 
 ## 参考资料
 

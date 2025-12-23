@@ -334,10 +334,16 @@ $$
 
 ---
 
-## 下一步
+## 📚 延伸学习
 
-- [开发环境](development.md) - 软件开发环境搭建
-- [FMCW 调制](../mmwave/fmcw.md) - 了解雷达工作原理
+!!! info "相关章节"
+    继续深入学习雷达硬件和软件的相关内容：
+
+| 主题 | 链接 | 内容简介 |
+|------|------|---------|
+| **开发环境** | [development.md](development.md) | 软件开发环境搭建 |
+| **FMCW 调制** | [../mmwave/fmcw.md](../mmwave/fmcw.md) | 了解雷达工作原理 |
+| **信号处理** | [../mmwave/signal-processing.md](../mmwave/signal-processing.md) | 深入信号处理算法 |
 
 ## 参考资料
 

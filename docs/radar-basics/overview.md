@@ -222,11 +222,16 @@ graph TD
 
 ---
 
-## 下一步
+## 📚 延伸学习
 
-- [雷达方程](radar-equation.md) - 深入学习雷达方程的推导和应用
-- [多普勒效应](doppler-effect.md) - 了解速度测量的原理
-- [FMCW 调制](../mmwave/fmcw.md) - 学习毫米波雷达的调制技术
+!!! info "相关章节"
+    继续深入学习雷达原理的其他重要概念：
+
+| 主题 | 链接 | 内容简介 |
+|------|------|---------|
+| **雷达方程** | [radar-equation.md](radar-equation.md) | 深入学习雷达方程的推导和应用 |
+| **多普勒效应** | [doppler-effect.md](doppler-effect.md) | 了解速度测量原理 |
+| **FMCW 调制** | [../mmwave/fmcw.md](../mmwave/fmcw.md) | 学习毫米波雷达的调制技术 |
 
 ## 参考资料
 
