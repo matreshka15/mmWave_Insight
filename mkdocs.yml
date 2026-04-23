@@ -174,11 +174,9 @@ plugins:
         color: "#ffffff"
         font_family: Noto Sans SC
   - minify:
-      minify_html: true
+      minify_html: false     # 必须关闭：HTML 压缩会删除 <div class="mermaid"> 内换行，导致 Mermaid 解析失败
       minify_js: true
       minify_css: true
-      htmlmin_opts:
-        remove_comments: true
       cache_safe: true
 
 # Extra

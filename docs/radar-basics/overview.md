@@ -3,7 +3,7 @@
 ## 什么是雷达？
 
 !!! info "雷达的定义"
-    雷达（**RADAR**）是 **RA**dio **D**etection **A**nd **R**anging 的缩写，意为“**无线电探测和测距**”。雷达是一种利用电磁波探测目标的电子设备。
+    雷达（**RADAR**）是 <strong>RA</strong>dio <strong>D</strong>etection <strong>A</strong>nd <strong>R</strong>anging 的缩写，意为"<strong>无线电探测和测距</strong>"。雷达是一种利用电磁波探测目标的电子设备。
 
 ### 🎯 雷达的基本功能
 

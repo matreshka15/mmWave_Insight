@@ -1,7 +1,7 @@
 # FMCW 调制
 
 !!! abstract "章节概述"
-    调频连续波（**F**requency **M**odulated **C**ontinuous **W**ave, **FMCW**）是毫米波雷达最常用的工作模式，它通过发射频率随时间线性变化的连续波信号来实现目标探测。
+    调频连续波（<strong>F</strong>requency <strong>M</strong>odulated <strong>C</strong>ontinuous <strong>W</strong>ave, **FMCW**）是毫米波雷达最常用的工作模式，它通过发射频率随时间线性变化的连续波信号来实现目标探测。
 
     📚 **本章学习路线**：
 

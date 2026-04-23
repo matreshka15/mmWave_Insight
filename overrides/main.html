@@ -79,7 +79,8 @@
 {% endblock %}
 
 {# ===== 注入 Body 开头：加载遮罩 DOM ===== #}
-{% block announce %}
+{# 使用 content block 的 super() 包裹，确保无论 announce 配置如何都能渲染 #}
+{% block content %}
   <div id="mm-loader" role="status" aria-live="polite" aria-label="页面加载中">
     <div class="mm-l">
       <span class="mm-l-icon" aria-hidden="true">📡</span>
@@ -87,4 +88,5 @@
       <div class="mm-l-text">mmWave Insight &nbsp;·&nbsp; 加载中…</div>
     </div>
   </div>
+  {{ super() }}
 {% endblock %}
