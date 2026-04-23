@@ -562,6 +562,97 @@ $$
     - ❌ 需要知道目标数量
     - ❌ 对噪声敏感
 
+#### Python 实现：MUSIC 角度谱估计
+
+下面给出面向 FMCW 雷达均匀线阵（ULA）的 MUSIC 完整实现，演示在两个相距仅 5° 的目标下仍可分辨：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def music_doa(X, num_sources, num_antennas, d_over_lambda=0.5,
+              theta_scan=np.linspace(-90, 90, 1801)):
+    """
+    均匀线阵 MUSIC 角度谱估计。
+
+    参数
+    ----
+    X : (N, K) 复数矩阵
+        N = 天线数，K = 快拍数（Chirp 数 / Range Bin 处的样本）
+    num_sources : int
+        待估计信源数（目标个数）
+    num_antennas : int
+        阵元数 N
+    d_over_lambda : float
+        阵元间距相对波长（TDM-MIMO 等效 ULA 一般为 0.5）
+    theta_scan : ndarray
+        搜索角度网格（度）
+    返回
+    ----
+    P_music : ndarray  归一化谱（dB）
+    theta_scan : ndarray  对应角度
+    """
+    # 1. 协方差矩阵
+    R = X @ X.conj().T / X.shape[1]
+
+    # 2. 特征分解并按特征值降序排序
+    eigvals, eigvecs = np.linalg.eigh(R)
+    idx = np.argsort(eigvals)[::-1]
+    eigvecs = eigvecs[:, idx]
+
+    # 3. 噪声子空间（后 N - P 个特征向量）
+    Un = eigvecs[:, num_sources:]
+
+    # 4. 扫描谱
+    theta_rad = np.deg2rad(theta_scan)
+    n = np.arange(num_antennas).reshape(-1, 1)
+    # 导向矢量矩阵 A: (N, len(theta))
+    A = np.exp(-1j * 2 * np.pi * d_over_lambda * n * np.sin(theta_rad))
+    # P_MUSIC(θ) = 1 / (a^H Un Un^H a)
+    denom = np.sum(np.abs(Un.conj().T @ A) ** 2, axis=0)
+    P = 1.0 / (denom + 1e-12)
+    P_db = 10 * np.log10(P / P.max())
+    return P_db, theta_scan
+
+
+# ============ 仿真：两个相近目标（3°, 8°） ============
+if __name__ == "__main__":
+    N = 8               # 阵元数
+    K = 200             # 快拍数
+    SNR_dB = 10
+    thetas_true = [3.0, 8.0]   # 真实角度（度）
+
+    n = np.arange(N).reshape(-1, 1)
+    A_true = np.exp(-1j * 2 * np.pi * 0.5 * n * np.sin(np.deg2rad(thetas_true)))
+    # 随机信号
+    S = (np.random.randn(len(thetas_true), K) +
+         1j * np.random.randn(len(thetas_true), K)) / np.sqrt(2)
+    sig = A_true @ S
+    noise_power = 10 ** (-SNR_dB / 10)
+    noise = np.sqrt(noise_power / 2) * (
+        np.random.randn(N, K) + 1j * np.random.randn(N, K))
+    X = sig + noise
+
+    P_db, theta = music_doa(X, num_sources=2, num_antennas=N)
+
+    plt.figure(figsize=(8, 4))
+    plt.plot(theta, P_db)
+    for t in thetas_true:
+        plt.axvline(t, color="r", linestyle="--", alpha=0.6)
+    plt.xlabel("角度 (°)"); plt.ylabel("归一化谱 (dB)")
+    plt.title(f"MUSIC 谱（N={N}, SNR={SNR_dB} dB）")
+    plt.grid(True); plt.tight_layout(); plt.show()
+```
+
+!!! tip "超分辨率验证"
+    FFT-based DOA 在 N=8 时角度分辨率约为 $\Delta\theta \approx 2/N \text{ rad} \approx 14°$，无法分辨 3° 与 8°。
+    MUSIC 由于利用噪声子空间正交性，能在高 SNR 下分辨 **小于瑞利极限** 的相邻目标。
+
+!!! warning "工程陷阱"
+    - 信源数 $P$ 估计不准 → 谱峰分裂或合并。实用中常用 **AIC / MDL** 准则自动估计。
+    - 相干信源（多径）→ 协方差秩亏，需配合 **空间平滑（Spatial Smoothing）** 预处理。
+    - 快拍数 $K$ 过少 → 协方差估计方差大，可用 **对角加载** 正则化：$\mathbf{R} \leftarrow \mathbf{R} + \mu \mathbf{I}$。
+
 ---
 
 ## 🛤️ 目标跟踪

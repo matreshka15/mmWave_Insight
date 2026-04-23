@@ -1,0 +1,56 @@
+name: Deploy MkDocs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for git-revision-date plugin
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Configure Git credentials
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache MkDocs build
+        uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ hashfiles('.cache/**') }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+
+      - name: Build site (strict)
+        run: mkdocs build --strict --verbose
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force --no-history

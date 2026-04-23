@@ -23,10 +23,7 @@ window.MathJax = {
     }
   },
   loader: {
-    load: ["[tex]/noerrors"],
-    paths: {
-      mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5"
-    }
+    load: ["[tex]/noerrors"]
   },
   startup: {
     // 禁用自动渲染，我们将手动控制

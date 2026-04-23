@@ -6,6 +6,7 @@ site_url: https://matreshka15.github.io/mmWave_Insight/
 # Repository
 repo_name: matreshka15/mmWave_Insight
 repo_url: https://github.com/matreshka15/mmWave_Insight
+edit_uri: edit/main/docs/
 
 # Copyright
 copyright: Copyright &copy; 2025 matreshka15 | mmWave Insight
@@ -34,24 +35,52 @@ theme:
     code: Roboto Mono
   features:
     - navigation.instant
+    - navigation.instant.progress
     - navigation.tracking
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
+    - navigation.indexes
     - navigation.top
+    - navigation.footer
+    - toc.follow
     - search.suggest
     - search.highlight
+    - search.share
     - content.code.copy
     - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - content.action.edit
+    - content.action.view
   icon:
     repo: fontawesome/brands/github
 
 # Extensions
 markdown_extensions:
+  - abbr
   - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.keys
+  - pymdownx.smartsymbols
+  - pymdownx.critic
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds: {case: lower}
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -59,6 +88,8 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_div_format
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.arithmatex:
@@ -66,12 +97,10 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - tables
-  - footnotes
-  - attr_list
-  - md_in_html
   - toc:
       permalink: true
+      permalink_title: 永久链接
+      toc_depth: 4
 
 # Extra CSS
 extra_css:
@@ -98,6 +127,8 @@ nav:
     - FMCW 调制原理: mmwave/fmcw.md
     - 信号处理技术: mmwave/signal-processing.md
     - 目标检测算法: mmwave/target-detection.md
+    - MIMO 与 DOA 估计: mmwave/mimo-doa.md
+    - 高级主题: mmwave/advanced-topics.md
 
   - 🎮 互动学习:
     - 交互式游乐场: interactive-playground.md
@@ -110,6 +141,9 @@ nav:
   - 📖 附加资源:
     - 图片库: image-gallery.md
     - 参考资料: references.md
+    - 术语表: glossary.md
+    - 贡献指南: contributing.md
+    - 更新日志: changelog.md
 
 # Plugins
 plugins:
@@ -117,3 +151,59 @@ plugins:
       lang:
         - zh
         - en
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;'
+  - git-revision-date-localized:
+      type: datetime
+      timezone: Asia/Shanghai
+      locale: zh
+      fallback_to_build_date: true
+      enable_creation_date: true
+      enable_git_follow: false
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+
+# Extra
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/matreshka15/mmWave_Insight
+      name: GitHub Repository
+  analytics:
+    feedback:
+      title: 本页对你有帮助吗？
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: 非常有帮助
+          data: 1
+          note: 感谢你的反馈！
+        - icon: material/emoticon-sad-outline
+          name: 还可以改进
+          data: 0
+          note: >-
+            感谢反馈！欢迎通过 <a href="https://github.com/matreshka15/mmWave_Insight/issues/new" target="_blank" rel="noopener">GitHub Issues</a> 告诉我们如何改进。
+
+# Validation (build warnings)
+validation:
+  omitted_files: ignore
+  absolute_links: warn
+  unrecognized_links: warn
+
+# Exclude non-content files
+exclude_docs: |
+  images/README.md
+

@@ -354,3 +354,107 @@
         font-size: 0.85em;
     }
 }
+
+/* ===== 深色模式下图片适应（避免白底图变模糊） ===== */
+[data-md-color-scheme="slate"] .md-typeset img:not([src*=".svg"]):not(.no-invert) {
+    filter: brightness(0.9) contrast(1.05);
+}
+
+[data-md-color-scheme="slate"] .md-typeset figure img {
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+/* ===== glightbox 灯箱样式对齐 ===== */
+.glightbox-clean .gslide-title {
+    color: var(--md-primary-fg-color);
+}
+
+/* ===== 术语表 abbr 悬浮提示 ===== */
+.md-typeset abbr {
+    text-decoration: underline dotted var(--md-accent-fg-color);
+    cursor: help;
+}
+
+/* ===== keys 键盘按键样式 ===== */
+.md-typeset kbd {
+    background: linear-gradient(180deg, var(--md-default-bg-color) 0%, var(--md-code-bg-color) 100%);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    box-shadow: 0 2px 0 var(--md-default-fg-color--lightest);
+    padding: 2px 6px;
+    font-size: 0.85em;
+}
+
+/* ===== 任务列表美化 ===== */
+.md-typeset .task-list-item {
+    list-style-type: none;
+}
+
+.md-typeset .task-list-control {
+    margin-right: 8px;
+}
+
+/* ===== 打印样式扩展 ===== */
+@media print {
+    .md-header, .md-tabs, .md-sidebar, .md-footer, .md-search, .md-typeset .md-button {
+        display: none !important;
+    }
+
+    .md-main__inner {
+        margin: 0 !important;
+    }
+
+    .md-content {
+        max-width: none !important;
+    }
+
+    .md-typeset a {
+        color: #000 !important;
+        text-decoration: underline;
+    }
+
+    .md-typeset a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #555;
+    }
+
+    .md-typeset h1, .md-typeset h2, .md-typeset h3 {
+        page-break-after: avoid;
+    }
+
+    .md-typeset pre, .md-typeset blockquote {
+        page-break-inside: avoid;
+    }
+}
+
+/* ===== 自定义滚动条 ===== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--md-code-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--md-primary-fg-color--light);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--md-accent-fg-color);
+}
+
+/* ===== 页面标题渐入动画 ===== */
+.md-typeset h1 {
+    animation: fadeInUp 0.45s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
