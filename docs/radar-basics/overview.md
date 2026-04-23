@@ -20,7 +20,7 @@
 
 雷达通过发射电磁波并接收目标反射回来的回波来工作。基本过程如下：
 
-![雷达发射接收示意](https://raw.githubusercontent.com/matreshka15/mmwave_radar_learning_notebook/master/pic/TXRX.png)
+![雷达发射接收示意](../images/signal-processing/TXRX.png)
 
 > 图：雷达的发射和接收基本原理
 
