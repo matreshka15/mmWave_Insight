@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{# ===== 注入 Head：加载动画内联样式 + 字体回退 ===== #}
+{% block extrahead %}
+  {{ super() }}
+  <style>
+    /* ---- 系统字体栈（消除 Google Fonts CDN 依赖） ---- */
+    :root {
+      --md-text-font: "Noto Sans SC", "Source Han Sans CN", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei",
+        "WenQuanYi Micro Hei", system-ui, -apple-system, sans-serif;
+      --md-code-font: "Roboto Mono", "Cascadia Code", "Fira Code",
+        "Source Code Pro", ui-monospace, "Courier New", monospace;
+    }
+
+    /* ---- 页面加载遮罩 ---- */
+    #mm-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--md-default-bg-color, #fff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #mm-loader.mm-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .mm-l {
+      text-align: center;
+      font-family: var(--md-text-font, system-ui, sans-serif);
+    }
+    .mm-l-icon {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: 14px;
+      animation: mm-bounce 1.4s ease-in-out infinite;
+    }
+    .mm-l-bar {
+      width: 200px;
+      height: 3px;
+      background: rgba(63, 81, 181, 0.15);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 auto 12px;
+    }
+    .mm-l-prog {
+      height: 100%;
+      width: 45%;
+      background: linear-gradient(90deg, #3f51b5, #7c4dff, #009688);
+      border-radius: 3px;
+      animation: mm-slide 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .mm-l-text {
+      font-size: 0.82rem;
+      color: var(--md-default-fg-color--light, #666);
+      letter-spacing: 0.03em;
+    }
+    @keyframes mm-bounce {
+      0%, 100% { transform: translateY(0);   opacity: 1; }
+      50%       { transform: translateY(-6px); opacity: 0.75; }
+    }
+    @keyframes mm-slide {
+      0%   { transform: translateX(-120%); }
+      100% { transform: translateX(280%); }
+    }
+
+    /* ---- 图片懒加载过渡 ---- */
+    .md-typeset img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .md-typeset img[loading="lazy"].mm-img-loaded {
+      opacity: 1;
+    }
+  </style>
+{% endblock %}
+
+{# ===== 注入 Body 开头：加载遮罩 DOM ===== #}
+{% block announce %}
+  <div id="mm-loader" role="status" aria-live="polite" aria-label="页面加载中">
+    <div class="mm-l">
+      <span class="mm-l-icon" aria-hidden="true">📡</span>
+      <div class="mm-l-bar"><div class="mm-l-prog"></div></div>
+      <div class="mm-l-text">mmWave Insight &nbsp;·&nbsp; 加载中…</div>
+    </div>
+  </div>
+{% endblock %}

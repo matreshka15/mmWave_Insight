@@ -417,7 +417,7 @@ $$
 
 结果：**Range-Doppler Map**（距离-多普勒图）
 
-![角度 FFT 处理](../images/fmcw/angleFFT.png)
+![角度 FFT 处理](../images/signal-processing/angleFFT.png)
 
 > 图：多维 FFT 处理流程，包括距离、速度和角度维度
 

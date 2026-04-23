@@ -14,6 +14,7 @@ copyright: Copyright &copy; 2025 matreshka15 | mmWave Insight
 # Configuration
 theme:
   name: material
+  custom_dir: overrides
   language: zh
   palette:
     # Palette toggle for light mode
@@ -30,9 +31,7 @@ theme:
       toggle:
         icon: material/brightness-4
         name: 切换至浅色模式
-  font:
-    text: Noto Sans SC
-    code: Roboto Mono
+  font: false  # 禁用 Google Fonts CDN；字体回退由 overrides/main.html 内联 CSS 提供
   features:
     - navigation.instant
     - navigation.instant.progress
@@ -107,11 +106,11 @@ extra_css:
   - stylesheets/extra.css
 
 # Extra JavaScript
+# tex-mml-chtml.js 和 mermaid.min.js 已改为按需懒加载，不在此列出
 extra_javascript:
+  - javascripts/page-loader.js
   - javascripts/mathjax.js
   - javascripts/libs/polyfill.min.js
-  - javascripts/libs/tex-mml-chtml.js
-  - javascripts/libs/mermaid.min.js
   - javascripts/mermaid-init.js
 
 # Page tree
@@ -168,6 +167,12 @@ plugins:
       height: auto
       zoomable: true
       draggable: true
+  - social:
+      enabled: !ENV [CI, false]   # 仅 CI (GitHub Actions) 中启用，本地无 Cairo 库时跳过
+      cards_layout_options:
+        background_color: "#3f51b5"
+        color: "#ffffff"
+        font_family: Noto Sans SC
   - minify:
       minify_html: true
       minify_js: true
